@@ -1,8 +1,8 @@
-package ru.vasiliev.hightechfmrss.domain;
+package ru.vasiliev.hightechfmrss.api;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import ru.vasiliev.hightechfmrss.model.RssFeed;
+import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 
 /**
  * Created by vasiliev on 04/02/2018.

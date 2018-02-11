@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.data.network;
+package ru.vasiliev.hightechfmrss.di.module;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,16 +12,21 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
- * Created by vasiliev on 04/02/2018.
+ * Created by vasiliev on 11/02/2018.
  */
 
 @Module
 public class NetworkModule {
-    public static final String API_BASE_URL = "https://hightech.fm";
+
+    private final String mBaseUrl;
+
+    public NetworkModule(String baseUrl) {
+        mBaseUrl = baseUrl;
+    }
 
     @Provides
     @Singleton
-    public static OkHttpClient getNetworkClient() {
+    public OkHttpClient provideNetworkClient() {
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
@@ -31,10 +36,10 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public static Retrofit getRetrofit() {
+    public Retrofit provideRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .client(getNetworkClient())
+                .baseUrl(mBaseUrl)
+                .client(client)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

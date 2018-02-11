@@ -2,7 +2,7 @@ package ru.vasiliev.hightechfmrss.presentation.article;
 
 import com.arellomobile.mvp.MvpView;
 
-import ru.vasiliev.hightechfmrss.model.Article;
+import ru.vasiliev.hightechfmrss.domain.model.Article;
 
 /**
  * Created by vasiliev on 11/02/2018.

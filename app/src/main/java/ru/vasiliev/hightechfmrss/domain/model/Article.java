@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.model;
+package ru.vasiliev.hightechfmrss.domain.model;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;

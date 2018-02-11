@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.vasiliev.hightechfmrss.R;
-import ru.vasiliev.hightechfmrss.model.Article;
+import ru.vasiliev.hightechfmrss.domain.model.Article;
 
 /**
  * Created by vasiliev on 07/02/2018.

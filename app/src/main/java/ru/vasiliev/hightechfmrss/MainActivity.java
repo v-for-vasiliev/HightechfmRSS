@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -20,12 +19,8 @@ import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import ru.vasiliev.hightechfmrss.domain.HightechFmApi;
-import ru.vasiliev.hightechfmrss.model.Article;
-import ru.vasiliev.hightechfmrss.model.RssFeed;
-import ru.vasiliev.hightechfmrss.data.network.NetworkModule;
+import ru.vasiliev.hightechfmrss.domain.model.Article;
+import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 import ru.vasiliev.hightechfmrss.presentation.rss.RssAdapter;
 
 public class MainActivity extends AppCompatActivity
@@ -161,11 +156,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     void test() {
-        HightechFmApi api = NetworkModule.getRetrofit().create(HightechFmApi.class);
+        /*
+        HightechFmApi api = DataModule.getRetrofit().create(HightechFmApi.class);
         api.getFeed().subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe(rssFeed -> {
             mRssFeed = rssFeed;
             showRss();
         }, throwable -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show());
+        */
     }
 }

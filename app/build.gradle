@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "ru.vasiliev.hightechfmrss"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${versions.supportLib}"
+    implementation "com.android.support:support-v4:${versions.supportLib}"
+    implementation "com.android.support:design:${versions.supportLib}"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // Dagger2
+    compile dagger2.dagger
+    annotationProcessor dagger2.daggerProcessor
+    compile dagger2.daggerAndroid
+    compile dagger2.daggerAndroidSupport
+    annotationProcessor dagger2.daggerAnnotationProcessor
+    // RxJava2
+    compile rxjava2.rxjava
+    compile rxjava2.rxandroid
+    // Retrofit
+    compile retrofit.retrofit
+    compile retrofit.retrofitRxJavaAdapter
+    compile retrofit.retrofitConverterSimpleXML
+    // ButterKnife
+    compile butterknife.butterknife
+    annotationProcessor butterknife.butterknifeAnnotationProcessor
+    // Timber
+    compile timber.timber
+    // Recycler
+    compile recycler.cardview
+    compile recycler.recyclerview
+    // Glide
+    implementation glide.glide
+    annotationProcessor glide.glideAnnotationProcessor
+    compile glide.recyclerIntegration
+    // Moxy
+    compile moxy.moxy
+    annotationProcessor moxy.moxyAnnotationProcessor
+    compile moxy.moxyAppCompat
+}

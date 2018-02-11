@@ -23,7 +23,7 @@ public class DataModule {
 
     @Provides
     @Singleton
-    RssRepository provideBookRepository(HightechFmApi hightechFmApi) {
+    RssRepository provideRssRepository(HightechFmApi hightechFmApi) {
         return new RssRepositoryImpl(hightechFmApi);
     }
 }

@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.di.module;
+package ru.vasiliev.hightechfmrss.di;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +27,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     public OkHttpClient provideNetworkClient() {
+        // ClientFactory.get()
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
@@ -37,6 +38,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient client) {
+        // NetworkRequester.get()
         return new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .client(client)

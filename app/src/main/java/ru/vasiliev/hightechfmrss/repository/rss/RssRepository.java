@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.repository;
+package ru.vasiliev.hightechfmrss.repository.rss;
 
 import io.reactivex.Observable;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;

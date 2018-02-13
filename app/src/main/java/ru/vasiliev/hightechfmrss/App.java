@@ -3,10 +3,10 @@ package ru.vasiliev.hightechfmrss;
 import android.app.Application;
 import android.content.Context;
 
-import ru.vasiliev.hightechfmrss.di.component.AppComponent;
-import ru.vasiliev.hightechfmrss.di.component.DaggerAppComponent;
-import ru.vasiliev.hightechfmrss.di.module.AppModule;
-import ru.vasiliev.hightechfmrss.di.module.NetworkModule;
+import ru.vasiliev.hightechfmrss.di.NetworkModule;
+import ru.vasiliev.hightechfmrss.di.app.AppComponent;
+import ru.vasiliev.hightechfmrss.di.app.AppModule;
+import ru.vasiliev.hightechfmrss.di.app.DaggerAppComponent;
 import timber.log.Timber;
 
 /**

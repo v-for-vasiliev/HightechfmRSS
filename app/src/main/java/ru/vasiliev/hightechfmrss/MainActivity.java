@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity
 
     void test() {
         /*
-        HightechFmApi api = DataModule.getRetrofit().create(HightechFmApi.class);
+        HightechFmApi api = RssModule.getRetrofit().create(HightechFmApi.class);
         api.getFeed().subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe(rssFeed -> {
             mRssFeed = rssFeed;

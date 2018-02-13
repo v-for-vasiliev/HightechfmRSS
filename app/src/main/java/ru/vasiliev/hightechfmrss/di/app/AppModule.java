@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.di.module;
+package ru.vasiliev.hightechfmrss.di.app;
 
 import android.support.annotation.NonNull;
 

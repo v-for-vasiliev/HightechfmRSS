@@ -1,9 +1,8 @@
-package ru.vasiliev.hightechfmrss.data.network;
+package ru.vasiliev.hightechfmrss.repository.rss;
 
 import io.reactivex.Observable;
-import ru.vasiliev.hightechfmrss.api.HightechFmApi;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
-import ru.vasiliev.hightechfmrss.repository.RssRepository;
+import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 
 /**
  * Created by vasiliev on 11/02/2018.

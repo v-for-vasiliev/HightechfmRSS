@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.api;
+package ru.vasiliev.hightechfmrss.repository.datasource;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

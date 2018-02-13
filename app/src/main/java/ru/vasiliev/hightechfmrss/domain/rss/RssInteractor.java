@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
-import ru.vasiliev.hightechfmrss.repository.RssRepository;
+import ru.vasiliev.hightechfmrss.repository.rss.RssRepository;
 
 /**
  * Created by vasiliev on 11/02/2018.

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.vasiliev.hightechfmrss.App;
-import ru.vasiliev.hightechfmrss.di.component.RssComponent;
+import ru.vasiliev.hightechfmrss.di.rss.RssComponent;
 import ru.vasiliev.hightechfmrss.domain.rss.RssInteractor;
 
 /**

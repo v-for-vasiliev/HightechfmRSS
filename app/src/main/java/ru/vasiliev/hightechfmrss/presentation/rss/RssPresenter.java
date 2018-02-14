@@ -5,8 +5,6 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.di.rss.RssComponent;
 import ru.vasiliev.hightechfmrss.domain.rss.RssInteractor;
@@ -28,9 +26,8 @@ public class RssPresenter extends MvpPresenter<RssView> {
 
     public void getFeed() {
         getViewState().showLoader();
-        mRssInteractor.getFeed().subscribeOn(Schedulers.io()).observeOn(
-                AndroidSchedulers.mainThread()).subscribe(rssFeed -> {
-            getViewState().showRss(rssFeed);
-        }, throwable -> getViewState().showError(throwable.getMessage()));
+        mRssInteractor.getFeed().subscribe(rssFeed ->
+                        getViewState().showFeed(rssFeed),
+                throwable -> getViewState().showError(throwable.getMessage()));
     }
 }

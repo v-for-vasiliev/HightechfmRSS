@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 import ru.vasiliev.hightechfmrss.repository.rss.RssRepository;
+import ru.vasiliev.hightechfmrss.utils.RxUtils;
 
 /**
  * Created by vasiliev on 11/02/2018.
@@ -20,6 +21,6 @@ public class RssInteractor {
     }
 
     public Observable<RssFeed> getFeed() {
-        return mRssRepository.getFeed();
+        return mRssRepository.getFeed().compose(RxUtils.ioSchedulers());
     }
 }

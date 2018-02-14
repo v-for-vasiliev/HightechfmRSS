@@ -6,30 +6,25 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 import ru.vasiliev.hightechfmrss.presentation.rss.RssAdapter;
+import ru.vasiliev.hightechfmrss.presentation.rss.RssFragment;
+import ru.vasiliev.hightechfmrss.utils.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int PRELOAD_AHEAD_ITEMS = 5;
-
-    @BindView(R.id.rss_recycler)
-    RecyclerView mRssRecycler;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RequestManager mGlideRequestManager;
@@ -59,43 +54,8 @@ public class MainActivity extends AppCompatActivity
         initUi();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        test();
-    }
-
     private void initUi() {
-        initRecycler();
-    }
-
-    private void initRecycler() {
-        mRssRecycler.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRssRecycler.setLayoutManager(mLayoutManager);
-
-        mGlideRequestManager = Glide.with(this);
-        mRssAdapter = new RssAdapter(mGlideRequestManager);
-
-        mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
-
-        RecyclerViewPreloader<Article> preloader = new RecyclerViewPreloader<>(Glide.with(this),
-                mRssAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);
-
-        mRssRecycler.setAdapter(mRssAdapter);
-        mRssRecycler.addOnScrollListener(preloader);
-
-        mRssRecycler.setRecyclerListener(holder -> {
-            RssAdapter.ViewHolder vh = (RssAdapter.ViewHolder) holder;
-            mGlideRequestManager.clear(vh.articleCover);
-        });
-    }
-
-    private void showRss() {
-        if (mRssFeed != null) {
-            mRssAdapter.setData(mRssFeed.articleList);
-            mRssAdapter.notifyDataSetChanged();
-        }
+        FragmentUtils.replaceWithHistory(this, new RssFragment(), R.id.fragment_container);
     }
 
     @Override
@@ -153,16 +113,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    void test() {
-        /*
-        HightechFmApi api = RssModule.getRetrofit().create(HightechFmApi.class);
-        api.getFeed().subscribeOn(Schedulers.io()).observeOn(
-                AndroidSchedulers.mainThread()).subscribe(rssFeed -> {
-            mRssFeed = rssFeed;
-            showRss();
-        }, throwable -> Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show());
-        */
     }
 }

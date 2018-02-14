@@ -9,7 +9,7 @@ import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
  */
 
 public interface RssView extends MvpView {
-    void showRss(RssFeed feed);
+    void showFeed(RssFeed feed);
 
     void showLoader();
 

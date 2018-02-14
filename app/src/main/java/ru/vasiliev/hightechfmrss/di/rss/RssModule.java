@@ -11,7 +11,7 @@ import ru.vasiliev.hightechfmrss.repository.rss.RssRepositoryImpl;
  * Created by vasiliev on 04/02/2018.
  */
 
-@Module//(includes = ApiModule.class)
+@Module
 public class RssModule {
 
     @RssScope

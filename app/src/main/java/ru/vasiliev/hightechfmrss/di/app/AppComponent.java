@@ -8,7 +8,6 @@ import ru.vasiliev.hightechfmrss.di.ApiModule;
 import ru.vasiliev.hightechfmrss.di.NetworkModule;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
 import ru.vasiliev.hightechfmrss.di.home.HomeComponent;
-import ru.vasiliev.hightechfmrss.di.home.HomeModule;
 import ru.vasiliev.hightechfmrss.di.rss.RssComponent;
 import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 
@@ -24,7 +23,7 @@ public interface AppComponent {
 
     HightechFmApi getHightechFmApi();
 
-    HomeComponent plusHomeComponent(HomeModule homeModule);
+    HomeComponent plusHomeComponent();
 
     RssComponent plusRssComponent();
 

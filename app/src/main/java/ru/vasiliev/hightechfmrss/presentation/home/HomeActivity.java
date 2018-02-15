@@ -5,24 +5,21 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import javax.inject.Inject;
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.ButterKnife;
-import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.R;
-import ru.vasiliev.hightechfmrss.di.home.HomeComponent;
-import ru.vasiliev.hightechfmrss.di.home.HomeModule;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends MvpAppCompatActivity
+        implements HomeView, NavigationView.OnNavigationItemSelectedListener {
 
-    @Inject
-    Router mRouter;
+    @InjectPresenter
+    HomePresenter mHomePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +40,11 @@ public class HomeActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        initDagger();
-
         initUi();
     }
 
-    private void initDagger() {
-        HomeComponent component = App.getAppComponent().plusHomeComponent(
-                new HomeModule(getSupportFragmentManager()));
-        component.inject(this);
-    }
-
     private void initUi() {
-        mRouter.openRss();
+        mHomePresenter.openRss(this);
     }
 
     @Override

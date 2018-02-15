@@ -2,8 +2,8 @@ package ru.vasiliev.hightechfmrss.di.home;
 
 import dagger.Subcomponent;
 import ru.vasiliev.hightechfmrss.di.scope.HomeScope;
-import ru.vasiliev.hightechfmrss.presentation.home.HomeActivity;
-import ru.vasiliev.hightechfmrss.presentation.home.Router;
+import ru.vasiliev.hightechfmrss.presentation.home.HomePresenter;
+import ru.vasiliev.hightechfmrss.presentation.Router;
 
 /**
  * Created by vasiliev on 15/02/2018.
@@ -15,5 +15,5 @@ public interface HomeComponent {
 
     Router getRouter();
 
-    void inject(HomeActivity homeActivity);
+    void inject(HomePresenter homeActivity);
 }

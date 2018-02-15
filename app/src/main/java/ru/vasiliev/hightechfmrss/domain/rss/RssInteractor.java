@@ -21,6 +21,6 @@ public class RssInteractor {
     }
 
     public Observable<RssFeed> getFeed() {
-        return mRssRepository.getFeed().compose(RxUtils.ioSchedulers());
+        return mRssRepository.getFeed().compose(RxUtils.ioScheduler());
     }
 }

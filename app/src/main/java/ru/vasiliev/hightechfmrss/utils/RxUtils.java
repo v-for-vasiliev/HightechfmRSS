@@ -9,12 +9,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class RxUtils {
-    public static <T> ObservableTransformer<T, T> ioSchedulers() {
+    public static <T> ObservableTransformer<T, T> ioScheduler() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static <T> ObservableTransformer<T, T> threadSchedulers() {
+    public static <T> ObservableTransformer<T, T> threadScheduler() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

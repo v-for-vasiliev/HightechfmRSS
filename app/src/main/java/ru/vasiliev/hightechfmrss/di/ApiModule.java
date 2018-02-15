@@ -11,7 +11,7 @@ import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
  * Created by vasiliev on 13/02/2018.
  */
 
-@Module//(includes = NetworkModule.class)
+@Module
 public class ApiModule {
 
     @Provides

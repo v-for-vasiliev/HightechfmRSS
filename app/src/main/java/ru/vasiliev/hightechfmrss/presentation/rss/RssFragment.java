@@ -17,11 +17,15 @@ import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.vasiliev.hightechfmrss.presentation.home.HomeActivity;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
+import ru.vasiliev.hightechfmrss.presentation.article.ArticleFragment;
+import ru.vasiliev.hightechfmrss.utils.FragmentUtils;
 
-public class RssFragment extends MvpAppCompatFragment implements RssView {
+public class RssFragment extends MvpAppCompatFragment implements RssView,
+        RssAdapter.RssItemSelectedListener {
 
     private static final int PRELOAD_AHEAD_ITEMS = 5;
 
@@ -70,6 +74,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView {
 
         mGlideRequestManager = Glide.with(this);
         mRssAdapter = new RssAdapter(mGlideRequestManager);
+        mRssAdapter.setRssItemSelectedListener(this);
 
         mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
 
@@ -101,5 +106,12 @@ public class RssFragment extends MvpAppCompatFragment implements RssView {
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void onRssItemSelected(Article article) {
+        FragmentUtils.replaceWithHistory((HomeActivity) getActivity(),
+                ArticleFragment.newInstance(article),
+                R.id.fragment_container);
     }
 }

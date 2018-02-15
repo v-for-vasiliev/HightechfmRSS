@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss;
+package ru.vasiliev.hightechfmrss.presentation.home;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -6,56 +6,56 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.util.ViewPreloadSizeProvider;
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import ru.vasiliev.hightechfmrss.domain.model.Article;
-import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
-import ru.vasiliev.hightechfmrss.presentation.rss.RssAdapter;
-import ru.vasiliev.hightechfmrss.presentation.rss.RssFragment;
-import ru.vasiliev.hightechfmrss.utils.FragmentUtils;
+import ru.vasiliev.hightechfmrss.App;
+import ru.vasiliev.hightechfmrss.R;
+import ru.vasiliev.hightechfmrss.di.home.HomeComponent;
+import ru.vasiliev.hightechfmrss.di.home.HomeModule;
 
-public class MainActivity extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int PRELOAD_AHEAD_ITEMS = 5;
-
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RequestManager mGlideRequestManager;
-    private ViewPreloadSizeProvider<Article> mPreloadSizeProvider;
-    private RssAdapter mRssAdapter;
-    private RssFeed mRssFeed;
+    @Inject
+    Router mRouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_home);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ButterKnife.bind(this);
 
+        initDagger();
+
         initUi();
     }
 
+    private void initDagger() {
+        HomeComponent component = App.getAppComponent().plusHomeComponent(
+                new HomeModule(getSupportFragmentManager()));
+        component.inject(this);
+    }
+
     private void initUi() {
-        FragmentUtils.replaceWithHistory(this, new RssFragment(), R.id.fragment_container);
+        mRouter.openRss();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

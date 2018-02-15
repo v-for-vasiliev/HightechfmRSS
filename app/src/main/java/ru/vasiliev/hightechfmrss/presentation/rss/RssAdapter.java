@@ -26,21 +26,25 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> implements
         ListPreloader.PreloadModelProvider<Article> {
     private RequestManager mGlideRequestManager;
-    private ListPreloader.PreloadSizeProvider<Article> mPreloadSizeProvider;
     private List<Article> mArticleList;
+    private RssItemSelectedListener mRssItemSelectedListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView articleTitle;
-        public ImageView articleCover;
+    public interface RssItemSelectedListener {
+        void onRssItemSelected(Article article);
+    }
 
-        public ViewHolder(View v) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView articleTitle;
+        ImageView articleCover;
+
+        ViewHolder(View v) {
             super(v);
             articleTitle = v.findViewById(R.id.article_title);
             articleCover = v.findViewById(R.id.article_cover);
         }
     }
 
-    public RssAdapter(RequestManager glideRequestManager) {
+    RssAdapter(RequestManager glideRequestManager) {
         mGlideRequestManager = glideRequestManager;
     }
 
@@ -48,23 +52,32 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         mArticleList = articleList;
     }
 
+    public void setRssItemSelectedListener(RssItemSelectedListener rssItemSelectedListener) {
+        mRssItemSelectedListener = rssItemSelectedListener;
+    }
+
     @Override
     public RssAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Create view, set the view's size, margins, paddings and layout parameters
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rss_cardview, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        // Replace the contents of the view with that element
         holder.articleTitle.setText(mArticleList.get(position).title);
+        holder.itemView.setOnClickListener(v -> {
+            if (mRssItemSelectedListener != null) {
+                mRssItemSelectedListener.onRssItemSelected(mArticleList.get(position));
+            }
+        });
         mGlideRequestManager.load(mArticleList.get(position).enclosure.get(0).url)
                 .into(holder.articleCover);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mArticleList != null ? mArticleList.size() : 0;

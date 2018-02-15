@@ -6,6 +6,9 @@ import dagger.Component;
 import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.di.ApiModule;
 import ru.vasiliev.hightechfmrss.di.NetworkModule;
+import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
+import ru.vasiliev.hightechfmrss.di.home.HomeComponent;
+import ru.vasiliev.hightechfmrss.di.home.HomeModule;
 import ru.vasiliev.hightechfmrss.di.rss.RssComponent;
 import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 
@@ -17,9 +20,13 @@ import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 @Component(modules = {AppModule.class, NetworkModule.class, ApiModule.class})
 public interface AppComponent {
 
-    RssComponent plusRssComponent();
-
     App getApp();
 
     HightechFmApi getHightechFmApi();
+
+    HomeComponent plusHomeComponent(HomeModule homeModule);
+
+    RssComponent plusRssComponent();
+
+    ArticleComponent plusArticleComponent();
 }

@@ -2,6 +2,8 @@ package ru.vasiliev.hightechfmrss.domain.model;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Namespace;
+import org.simpleframework.xml.NamespaceList;
 import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
@@ -12,6 +14,13 @@ import java.util.List;
  */
 
 @Root(name = "item", strict = false)
+@NamespaceList({
+        @Namespace(prefix = "content", reference = "http://purl.org/rss/1.0/modules/encoded/"),
+        @Namespace(prefix = "dc", reference = "http://purl.org/dc/elements/1.1/"),
+        @Namespace(prefix = "media", reference = "http://search.yahoo.com/mrss/"),
+        @Namespace(prefix = "atom", reference = "http://www.w3.org/2005/Atom"),
+        @Namespace(prefix = "georss", reference = "http://www.georss.org/georss")
+})
 public class Article implements Serializable {
     @Element(name = "title")
     public String title;
@@ -29,19 +38,18 @@ public class Article implements Serializable {
     public String category;
 
     @ElementList(entry = "enclosure", inline = true, required = false)
-    //@Element(type = Enclosure.class, name = "enclosure")
     public List<Enclosure> enclosure;
 
     @Element(name = "pubDate")
     public String pubDate;
 
-    @Element(name = "content:encoded", required = false)
-    public String content;
+    @Element(name = "encoded", data = true, required = false)
+    public String encoded;
 
     @Element(name = "pdalink", required = false)
     public String pdalink;
 
-    @Element(name = "media:rating", required = false)
+    @Element(name = "rating", required = false)
     public String rating;
 
     @Override
@@ -54,7 +62,7 @@ public class Article implements Serializable {
                 ", category='" + category + '\'' +
                 ", enclosure=" + enclosure +
                 ", pubDate='" + pubDate + '\'' +
-                ", content='" + content + '\'' +
+                ", encoded='" + encoded + '\'' +
                 ", pdalink='" + pdalink + '\'' +
                 ", rating='" + rating + '\'' +
                 '}';

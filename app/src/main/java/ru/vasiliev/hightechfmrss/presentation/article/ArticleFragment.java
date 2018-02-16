@@ -115,7 +115,7 @@ public class ArticleFragment extends MvpAppCompatFragment implements ArticleView
 
         mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
 
-        RecyclerViewPreloader<Enclosure> preloader = new RecyclerViewPreloader(
+        RecyclerViewPreloader<Enclosure> preloader = new RecyclerViewPreloader<>(
                 Glide.with(this),
                 mEnclosureAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);
 

@@ -55,9 +55,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
         ButterKnife.bind(this, view);
         return view;
     }
-
-    on
-
+    
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

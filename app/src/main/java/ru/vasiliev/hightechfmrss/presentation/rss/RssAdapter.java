@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,13 +35,17 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView articleTitle;
         ImageView articleCover;
+        TextView articleTitle;
+        TextView articleCategory;
+        TextView articlePubTime;
 
         ViewHolder(View v) {
             super(v);
-            articleTitle = v.findViewById(R.id.article_title);
             articleCover = v.findViewById(R.id.article_cover);
+            articleTitle = v.findViewById(R.id.article_title);
+            articleCategory = v.findViewById(R.id.article_category);
+            articlePubTime = v.findViewById(R.id.article_pub_time);
         }
     }
 
@@ -69,12 +74,17 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Replace the contents of the view with that element
         holder.articleTitle.setText(mArticleList.get(position).title);
+        holder.articleCategory.setText(mArticleList.get(position).category);
+        holder.articlePubTime.setText(mArticleList.get(position).pubDate);
+
         holder.itemView.setOnClickListener(v -> {
             if (mRssItemSelectedListener != null) {
                 mRssItemSelectedListener.onRssItemSelected(mArticleList.get(position));
             }
         });
         mGlideRequestManager.load(mArticleList.get(position).enclosure.get(0).url)
+                .apply(new RequestOptions().placeholder(R.drawable.article_image_placeholder).error(
+                        R.drawable.article_image_placeholder))
                 .into(holder.articleCover);
     }
 
@@ -99,6 +109,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Article may have no enclosures
         boolean hasEnclosure = item.enclosure != null && item.enclosure.size() > 0;
         return mGlideRequestManager.load(
-                hasEnclosure ? item.enclosure.get(0).url : R.drawable.article_cover_placeholder);
+                hasEnclosure ? item.enclosure.get(0).url : R.drawable.article_image_placeholder)
+                .apply(new RequestOptions().placeholder(R.drawable.article_image_placeholder).error(
+                        R.drawable.article_image_placeholder));
     }
 }

@@ -1,7 +1,8 @@
 package ru.vasiliev.hightechfmrss.presentation.rss;
 
 import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
@@ -11,13 +12,13 @@ import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
  */
 
 public interface RssView extends MvpView {
-    
-    @StateStrategyType(OneExecutionStateStrategy.class)
+
+    @StateStrategyType(AddToEndSingleStrategy.class)
     void showFeed(RssFeed feed);
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
+    @StateStrategyType(SkipStrategy.class)
     void showLoader();
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
+    @StateStrategyType(SkipStrategy.class)
     void showError(String error);
 }

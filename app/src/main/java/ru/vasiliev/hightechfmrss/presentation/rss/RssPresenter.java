@@ -42,7 +42,6 @@ public class RssPresenter extends MvpBasePresenter<RssView> {
 
             @Override
             public void onComplete() {
-
             }
         }));
     }

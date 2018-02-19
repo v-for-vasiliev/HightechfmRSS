@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/hightech_original_gray_dark</color>
+    <color name="colorPrimaryDark">@color/hightech_original_gray_dark</color>
+    <color name="colorAccent">@color/hightech_original_accent</color>
+
+    <!-- hightech.fm -->
+    <color name="hightech_original_gray">#969696</color>
+    <color name="hightech_original_gray_dark">#323233</color>
+    <color name="hightech_original_accent">#f93324</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Gray -->
+    <color name="backgroud_gray_50">#FAFAFA</color>
+    <color name="backgroud_gray_100">#F5F5F5</color>
+    <color name="backgroud_gray_200">#EEEEEE</color>
+    <color name="backgroud_gray_300">#E0E0E0</color>
+    <color name="backgroud_gray_400">#BDBDBD</color>
+    <color name="backgroud_gray_500">#9E9E9E</color>
+    <color name="backgroud_gray_600">#757575</color>
+    <color name="backgroud_gray_700">#616161</color>
+    <color name="backgroud_gray_800">#424242</color>
+    <color name="backgroud_gray_900">#212121</color>
+
+    <!-- Blue -->
+    <color name="backgroud_blue_900">#0D47A1</color>
 </resources>

@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/article_cover_placeholder"/>
+                android:src="@drawable/article_image_placeholder"/>
 
             <TextView
                 android:id="@+id/enclosure_index"

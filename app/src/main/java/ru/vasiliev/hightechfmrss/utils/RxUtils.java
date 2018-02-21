@@ -1,6 +1,7 @@
 package ru.vasiliev.hightechfmrss.utils;
 
 import io.reactivex.ObservableTransformer;
+import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -9,12 +10,22 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class RxUtils {
-    public static <T> ObservableTransformer<T, T> ioScheduler() {
+    public static <T> ObservableTransformer<T, T> observableIoScheduler() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static <T> ObservableTransformer<T, T> threadScheduler() {
+    public static <T> SingleTransformer<T, T> singleIoScheduler() {
+        return single -> single.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <T> ObservableTransformer<T, T> observableThreadScheduler() {
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <T> SingleTransformer<T, T> singleThreadScheduler() {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

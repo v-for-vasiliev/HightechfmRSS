@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.repository.rss;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 
 /**
@@ -8,5 +8,5 @@ import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
  */
 
 public interface RssRepository {
-    Observable<RssFeed> getFeed();
+    Single<RssFeed> getFeed(boolean allowCache);
 }

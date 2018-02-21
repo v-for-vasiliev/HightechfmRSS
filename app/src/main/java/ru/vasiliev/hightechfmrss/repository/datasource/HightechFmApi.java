@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.repository.datasource;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 
@@ -10,5 +10,5 @@ import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 
 public interface HightechFmApi {
     @GET("feed.rss")
-    Observable<RssFeed> getFeed();
+    Single<RssFeed> getFeed();
 }

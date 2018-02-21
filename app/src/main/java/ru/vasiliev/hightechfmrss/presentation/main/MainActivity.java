@@ -1,8 +1,9 @@
-package ru.vasiliev.hightechfmrss.presentation.home;
+package ru.vasiliev.hightechfmrss.presentation.main;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -12,19 +13,25 @@ import android.view.MenuItem;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.R;
 
-public class HomeActivity extends MvpAppCompatActivity
-        implements HomeView, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpAppCompatActivity
+        implements MainView, NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.rss_pager)
+    ViewPager mRssViewPager;
 
     @InjectPresenter
-    HomePresenter mHomePresenter;
+    MainPresenter mMainPresenter;
+
+    RssPagerAdapter mRssPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,7 +51,9 @@ public class HomeActivity extends MvpAppCompatActivity
     }
 
     private void initUi() {
-        mHomePresenter.openRss(this);
+        mRssPagerAdapter = new RssPagerAdapter(getSupportFragmentManager());
+        mRssViewPager.setAdapter(mRssPagerAdapter);
+        mRssViewPager.setOffscreenPageLimit(1);
     }
 
     @Override

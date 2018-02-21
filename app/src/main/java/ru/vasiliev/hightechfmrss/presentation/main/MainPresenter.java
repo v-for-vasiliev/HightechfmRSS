@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.presentation.home;
+package ru.vasiliev.hightechfmrss.presentation.main;
 
 import android.support.v7.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import javax.inject.Inject;
 
 import ru.vasiliev.hightechfmrss.App;
-import ru.vasiliev.hightechfmrss.di.home.HomeComponent;
+import ru.vasiliev.hightechfmrss.di.main.MainComponent;
 import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
 import ru.vasiliev.hightechfmrss.presentation.Router;
 
@@ -16,13 +16,13 @@ import ru.vasiliev.hightechfmrss.presentation.Router;
  */
 
 @InjectViewState
-public class HomePresenter extends MvpBasePresenter<HomeView> {
+public class MainPresenter extends MvpBasePresenter<MainView> {
 
     @Inject
     Router mRouter;
 
-    HomePresenter() {
-        HomeComponent component = App.getAppComponent().plusHomeComponent();
+    MainPresenter() {
+        MainComponent component = App.getAppComponent().plusHomeComponent();
         component.inject(this);
     }
 

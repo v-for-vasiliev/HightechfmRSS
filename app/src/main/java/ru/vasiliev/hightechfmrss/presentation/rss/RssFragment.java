@@ -2,7 +2,6 @@ package ru.vasiliev.hightechfmrss.presentation.rss;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,21 +22,14 @@ import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
-import ru.vasiliev.hightechfmrss.presentation.article.ArticleFragment;
-import ru.vasiliev.hightechfmrss.presentation.home.HomeActivity;
-import ru.vasiliev.hightechfmrss.utils.FragmentUtils;
 
 public class RssFragment extends MvpAppCompatFragment implements RssView,
         RssAdapter.RssItemSelectedListener {
 
     private static final int PRELOAD_AHEAD_ITEMS = 5;
-    private static final int VERTICAL_ITEM_SPACE = 48;
 
     @BindView(R.id.rss_recycler)
     RecyclerView mRssRecycler;
-
-    @BindView(R.id.rss_category_tabs)
-    TabLayout mRssCategoryTabs;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RequestManager mGlideRequestManager;
@@ -75,8 +67,6 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
         initRecycler();
 
-        initTabs();
-
         mRssPresenter.getFeed();
     }
 
@@ -101,50 +91,6 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
             RssAdapter.ViewHolder vh = (RssAdapter.ViewHolder) holder;
             mGlideRequestManager.clear(vh.articleCover);
         });
-
-        // This returns lost enertia to recycler
-        // mRssRecycler.setNestedScrollingEnabled(false);
-
-        /*
-        mRssRecycler.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-        mRssRecycler.addItemDecoration(
-                new DividerItemDecoration(R.drawable.rss_recycler_divider, getContext(), 1));
-        */
-    }
-
-    private void initTabs() {
-        mRssCategoryTabs.addTab(mRssCategoryTabs.newTab().setText(ArticleCategory.ALL.getTitle()));
-        mRssCategoryTabs.addTab(
-                mRssCategoryTabs.newTab().setText(ArticleCategory.CASES.getTitle()));
-        mRssCategoryTabs.addTab(
-                mRssCategoryTabs.newTab().setText(ArticleCategory.IDEAS.getTitle()));
-        mRssCategoryTabs.addTab(
-                mRssCategoryTabs.newTab().setText(ArticleCategory.BLOCKCHAIN.getTitle()));
-        mRssCategoryTabs.addTab(
-                mRssCategoryTabs.newTab().setText(ArticleCategory.OPINIONS.getTitle()));
-        mRssCategoryTabs.addTab(
-                mRssCategoryTabs.newTab().setText(ArticleCategory.TRENDS.getTitle()));
-
-        mRssCategoryTabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-
-                } else if (tab.getPosition() == 1) {
-                } else {
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -167,8 +113,9 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     @Override
     public void onRssItemSelected(Article article) {
-        FragmentUtils.replaceWithHistory((HomeActivity) getActivity(),
+        /*
+        FragmentUtils.replaceWithHistory((MainActivity) getActivity(),
                 ArticleFragment.newInstance(article),
-                R.id.fragment_container);
+                R.id.fragment_container);*/
     }
 }

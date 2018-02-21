@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.repository.rss;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 
@@ -17,7 +17,7 @@ public class RssRepositoryImpl implements RssRepository {
     }
 
     @Override
-    public Observable<RssFeed> getFeed() {
+    public Single<RssFeed> getFeed(boolean allowCache) {
         return mHightechFmApi.getFeed();
     }
 }

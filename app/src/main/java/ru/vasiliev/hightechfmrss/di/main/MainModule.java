@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.di.home;
+package ru.vasiliev.hightechfmrss.di.main;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,7 +11,7 @@ import ru.vasiliev.hightechfmrss.presentation.RouterImpl;
  */
 
 @Module
-public class HomeModule {
+public class MainModule {
 
     @Provides
     @HomeScope

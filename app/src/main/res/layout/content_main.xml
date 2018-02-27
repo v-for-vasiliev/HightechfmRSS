@@ -5,24 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="false"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <!-- Height must be set to wrap_content,
+        otherwise fregments will adjust pager height to the same as fragment have -->
     <android.support.v4.view.ViewPager
         android:id="@+id/rss_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/rss_pager_title_strip"
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/rss_pager_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:background="@color/colorPrimary"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:textColor="@color/white"/>
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textAppearance="@style/RssTabs"
+            android:textColor="@color/colorAccent"/>
 
     </android.support.v4.view.ViewPager>
 

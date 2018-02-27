@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
-import ru.vasiliev.hightechfmrss.presentation.rss.RssFragment;
+import ru.vasiliev.hightechfmrss.presentation.main.rss.RssFragment;
 
 /**
  * Created by vasiliev on 22/02/2018.

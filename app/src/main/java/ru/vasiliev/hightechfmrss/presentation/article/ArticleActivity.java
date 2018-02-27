@@ -1,18 +1,18 @@
 package ru.vasiliev.hightechfmrss.presentation.article;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -24,10 +24,11 @@ import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
+import timber.log.Timber;
 
-public class ArticleFragment extends MvpAppCompatFragment implements ArticleView {
+public class ArticleActivity extends MvpAppCompatActivity implements ArticleView {
 
-    protected static final String ARG_ARTICLE = "article";
+    protected static final String KEY_ARTICLE = "article";
 
     private static final int PRELOAD_AHEAD_ITEMS = 5;
 
@@ -48,36 +49,36 @@ public class ArticleFragment extends MvpAppCompatFragment implements ArticleView
     @InjectPresenter
     ArticlePresenter mArticlePresenter;
 
-    public ArticleFragment() {
-    }
+    public static class Builder {
 
-    public static ArticleFragment newInstance(Article article) {
-        ArticleFragment fragment = new ArticleFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_ARTICLE, article);
-        fragment.setArguments(args);
-        return fragment;
+        private Intent mStartIntent = new Intent();
+
+        public Builder setArticle(Article article) {
+            if (article != null) {
+                mStartIntent.putExtra(KEY_ARTICLE, article);
+            }
+            return this;
+        }
+
+        public void start(AppCompatActivity parentActivity) {
+            Timber.d("Starting %s", getClass().getSimpleName());
+            mStartIntent.setClass(parentActivity, ArticleActivity.class);
+            parentActivity.startActivity(mStartIntent);
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mArticlePresenter.extractArguments(getArguments());
-        }
-    }
+        setContentView(R.layout.activity_article);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_article, container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        ButterKnife.bind(this);
+
+        mArticlePresenter.extractArguments(getIntent());
 
         initUi();
 
@@ -106,7 +107,7 @@ public class ArticleFragment extends MvpAppCompatFragment implements ArticleView
 
     private void initRecycler() {
         mEnclosureRecycler.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false);
         mEnclosureRecycler.setLayoutManager(mLayoutManager);
 
@@ -126,5 +127,16 @@ public class ArticleFragment extends MvpAppCompatFragment implements ArticleView
             EnclosureAdapter.ViewHolder vh = (EnclosureAdapter.ViewHolder) holder;
             mGlideRequestManager.clear(vh.enclosureImage);
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

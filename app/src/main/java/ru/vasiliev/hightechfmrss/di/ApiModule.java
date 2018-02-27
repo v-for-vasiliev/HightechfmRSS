@@ -14,8 +14,8 @@ import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 @Module
 public class ApiModule {
 
-    @Provides
     @Singleton
+    @Provides
     public HightechFmApi provideHightechFmApi(Retrofit retrofit) {
         return retrofit.create(HightechFmApi.class);
     }

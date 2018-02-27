@@ -20,6 +20,8 @@ import ru.vasiliev.hightechfmrss.R;
 public class MainActivity extends MvpAppCompatActivity
         implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int OFFSCREEN_PAGE_LIMIT = 3;
+
     @BindView(R.id.rss_pager)
     ViewPager mRssViewPager;
 
@@ -53,7 +55,7 @@ public class MainActivity extends MvpAppCompatActivity
     private void initUi() {
         mRssPagerAdapter = new RssPagerAdapter(getSupportFragmentManager());
         mRssViewPager.setAdapter(mRssPagerAdapter);
-        mRssViewPager.setOffscreenPageLimit(1);
+        mRssViewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
     }
 
     @Override

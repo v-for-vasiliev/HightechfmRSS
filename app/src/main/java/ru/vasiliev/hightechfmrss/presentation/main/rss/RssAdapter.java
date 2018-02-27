@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.presentation.rss;
+package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +19,7 @@ import java.util.List;
 
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
+import ru.vasiliev.hightechfmrss.utils.DateUtils;
 
 /**
  * Created by vasiliev on 07/02/2018.
@@ -55,6 +56,7 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
 
     public void setData(List<Article> articleList) {
         mArticleList = articleList;
+        Collections.sort(mArticleList, Collections.reverseOrder());
     }
 
     public void setRssItemSelectedListener(RssItemSelectedListener rssItemSelectedListener) {
@@ -75,7 +77,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Replace the contents of the view with that element
         holder.articleTitle.setText(mArticleList.get(position).title);
         holder.articleCategory.setText(mArticleList.get(position).category);
-        holder.articlePubTime.setText(mArticleList.get(position).pubDate);
+        holder.articlePubTime.setText(
+                DateUtils.toHumanReadable(mArticleList.get(position).pubDate));
 
         holder.itemView.setOnClickListener(v -> {
             if (mRssItemSelectedListener != null) {

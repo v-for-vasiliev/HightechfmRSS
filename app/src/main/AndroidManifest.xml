@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+    <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -22,6 +22,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".presentation.article.ArticleActivity"
+            android:label="@string/article_title"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

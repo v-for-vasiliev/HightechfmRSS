@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/hightech_original_gray_dark</color>
     <color name="colorPrimaryDark">@color/hightech_original_gray_dark</color>
-    <color name="colorAccent">@color/hightech_original_accent</color>
+    <color name="colorAccent">@color/material_red_900</color>
 
     <!-- hightech.fm -->
     <color name="hightech_original_gray">#969696</color>
@@ -11,18 +11,26 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="black_850">#282828</color>
 
     <!-- Gray -->
-    <color name="backgroud_gray_50">#FAFAFA</color>
-    <color name="backgroud_gray_100">#F5F5F5</color>
-    <color name="backgroud_gray_200">#EEEEEE</color>
-    <color name="backgroud_gray_300">#E0E0E0</color>
-    <color name="backgroud_gray_400">#BDBDBD</color>
-    <color name="backgroud_gray_500">#9E9E9E</color>
-    <color name="backgroud_gray_600">#757575</color>
-    <color name="backgroud_gray_700">#616161</color>
-    <color name="backgroud_gray_800">#424242</color>
-    <color name="backgroud_gray_900">#212121</color>
+    <color name="material_gray_50">#FAFAFA</color>
+    <color name="material_gray_100">#F5F5F5</color>
+    <color name="material_gray_200">#EEEEEE</color>
+    <color name="material_gray_300">#E0E0E0</color>
+    <color name="material_gray_400">#BDBDBD</color>
+    <color name="material_gray_500">#9E9E9E</color>
+    <color name="material_gray_600">#757575</color>
+    <color name="material_gray_700">#616161</color>
+    <color name="material_gray_800">#424242</color>
+    <color name="material_gray_900">#212121</color>
+
+    <!-- Red -->
+    <color name="material_red_600">#F4511E</color>
+    <color name="material_red_700">#E64A19</color>
+    <color name="material_red_800">#D84315</color>
+    <color name="material_red_900">#BF360C</color>
+    <color name="material_red_A700">#DD2C00</color>
 
     <!-- Blue -->
     <color name="backgroud_blue_900">#0D47A1</color>

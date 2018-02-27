@@ -1,5 +1,7 @@
 package ru.vasiliev.hightechfmrss.domain.model;
 
+import android.support.annotation.NonNull;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
@@ -8,6 +10,9 @@ import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
 import java.util.List;
+
+import ru.vasiliev.hightechfmrss.utils.DateUtils;
+import timber.log.Timber;
 
 /**
  * Created by vasiliev on 04/02/2018.
@@ -21,7 +26,7 @@ import java.util.List;
         @Namespace(prefix = "atom", reference = "http://www.w3.org/2005/Atom"),
         @Namespace(prefix = "georss", reference = "http://www.georss.org/georss")
 })
-public class Article implements Serializable {
+public class Article implements Serializable, Comparable<Article> {
     @Element(name = "title")
     public String title;
 
@@ -66,5 +71,15 @@ public class Article implements Serializable {
                 ", pdalink='" + pdalink + '\'' +
                 ", rating='" + rating + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NonNull Article article) {
+        try {
+            return DateUtils.parse(pubDate).compareTo(DateUtils.parse(article.pubDate));
+        } catch (Throwable t) {
+            Timber.e(t, "");
+            return 0;
+        }
     }
 }

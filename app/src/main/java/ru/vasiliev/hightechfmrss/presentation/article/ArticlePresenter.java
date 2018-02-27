@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.presentation.article;
 
-import android.os.Bundle;
+import android.content.Intent;
 
 import com.arellomobile.mvp.InjectViewState;
 
@@ -29,8 +29,10 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
         component.inject(this);
     }
 
-    void extractArguments(Bundle arguments) {
-        mArticle = (Article) arguments.getSerializable(ArticleFragment.ARG_ARTICLE);
+    void extractArguments(Intent startIntent) {
+        if (startIntent != null) {
+            mArticle = (Article) startIntent.getSerializableExtra(ArticleActivity.KEY_ARTICLE);
+        }
     }
 
     void showArticle() {

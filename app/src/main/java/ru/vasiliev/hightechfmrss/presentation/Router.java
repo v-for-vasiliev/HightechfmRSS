@@ -10,7 +10,5 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
 
 public interface Router {
 
-    void openRss(AppCompatActivity activity);
-
     void openArticle(AppCompatActivity activity, Article article);
 }

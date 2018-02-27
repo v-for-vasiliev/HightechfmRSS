@@ -13,7 +13,8 @@ ext {
             butterknife: '8.8.1',
             timber     : '4.1.2',
             glide      : '4.3.1',
-            moxy       : '1.5.3'
+            moxy       : '1.5.3',
+            jodatime   : '2.9.9'
     ]
 
     dagger2 = [
@@ -61,5 +62,9 @@ ext {
             moxy                   : "com.arello-mobile:moxy:${versions.moxy}",
             moxyAnnotationProcessor: "com.arello-mobile:moxy-compiler:${versions.moxy}",
             moxyAppCompat          : "com.arello-mobile:moxy-app-compat:${versions.moxy}"
+    ]
+
+    jodatime = [
+            jodatime: "joda-time:joda-time:${versions.jodatime}"
     ]
 }

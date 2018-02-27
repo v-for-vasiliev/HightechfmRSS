@@ -17,10 +17,9 @@ public class AppModule {
         mApp = appContext;
     }
 
-    @Provides
     @Singleton
+    @Provides
     App provideApp() {
         return mApp;
     }
-
 }

@@ -29,6 +29,15 @@ android {
     buildTypes.all {
         buildConfigField "String", "API_BASE_URL", "\"https://hightech.fm\""
     }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk false
+        }
+    }
 }
 
 dependencies {
@@ -70,4 +79,6 @@ dependencies {
     compile moxy.moxy
     annotationProcessor moxy.moxyAnnotationProcessor
     compile moxy.moxyAppCompat
+    // JodaTime
+    compile jodatime.jodatime
 }

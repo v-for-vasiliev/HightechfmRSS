@@ -1,7 +1,8 @@
-package ru.vasiliev.hightechfmrss.presentation.rss;
+package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -96,6 +97,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     @Override
     public void showFeed(RssFeed feed) {
         if (feed != null) {
+
             mRssAdapter.setData(feed.articleList);
             mRssAdapter.notifyDataSetChanged();
         }
@@ -113,9 +115,6 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     @Override
     public void onRssItemSelected(Article article) {
-        /*
-        FragmentUtils.replaceWithHistory((MainActivity) getActivity(),
-                ArticleFragment.newInstance(article),
-                R.id.fragment_container);*/
+        mRssPresenter.getRouter().openArticle((AppCompatActivity) getActivity(), article);
     }
 }

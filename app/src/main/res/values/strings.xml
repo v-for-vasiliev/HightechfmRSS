@@ -2,6 +2,9 @@
     <string name="app_name">Хайтек</string>
     <string name="email">editorial@hightech.fm</string>
 
+    <!-- Article -->
+    <string name="article_title">Публикация</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

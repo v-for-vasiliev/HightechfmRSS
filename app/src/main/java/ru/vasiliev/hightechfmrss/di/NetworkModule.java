@@ -24,8 +24,8 @@ public class NetworkModule {
         mBaseUrl = baseUrl;
     }
 
-    @Provides
     @Singleton
+    @Provides
     public OkHttpClient provideNetworkClient() {
         // ClientFactory.get()
         return new OkHttpClient.Builder()
@@ -35,8 +35,8 @@ public class NetworkModule {
                 .build();
     }
 
-    @Provides
     @Singleton
+    @Provides
     public Retrofit provideRetrofit(OkHttpClient client) {
         // NetworkRequester.get()
         return new Retrofit.Builder()

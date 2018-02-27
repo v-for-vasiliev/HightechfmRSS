@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.presentation.rss;
+package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;

@@ -3,6 +3,7 @@ package ru.vasiliev.hightechfmrss.utils;
 import android.content.res.Resources;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeFieldType;
 import org.joda.time.Hours;
 import org.joda.time.LocalDate;
 import org.joda.time.Minutes;
@@ -25,25 +26,28 @@ public class DateUtils {
 
     private static DateTimeFormatter DATE_FORMATTER_REGULAR = DateTimeFormat.forPattern(
             "dd MMM HH:mm");
-    private static DateTimeFormatter DATE_FORMATTER_HHMM = DateTimeFormat.forPattern("hh:mm");
+    private static DateTimeFormatter DATE_FORMATTER_HHMM = DateTimeFormat.forPattern("HH:mm");
 
     private static final DateTimeParser[] PARSERS = {
-            DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").getParser(),
-            DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss ZZZ").getParser(),
+            DateTimeFormat.forPattern("EEE, dd MMM yyyy hh:mm:ss Z").getParser(),
+            DateTimeFormat.forPattern("EEE, dd MMM yyyy hh:mm:ss ZZZ").getParser(),
     };
 
     private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .append(null, PARSERS).toFormatter().withLocale(
-                    Locale.ENGLISH).withOffsetParsed();
+                    Locale.US).withOffsetParsed();
 
     private static final int LATEST_HOURS_INTERVAL = 7;
+
+    private static final int PM_HACK_MARKER = 1;
 
     private static Resources getResources() {
         return App.getContext().getResources();
     }
 
     public static DateTime parse(String date) {
-        return FORMATTER.parseDateTime(date);
+        // FIXME: hack fixes time always comes in PM (no 'half of a day' marker in rss xml)
+        return FORMATTER.parseDateTime(date).withField(DateTimeFieldType.halfdayOfDay(), PM_HACK_MARKER);
     }
 
     public static String toHumanReadable(String date) {

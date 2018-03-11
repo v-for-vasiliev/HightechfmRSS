@@ -1,15 +1,15 @@
-package ru.vasiliev.hightechfmrss.style;
+package ru.vasiliev.hightechfmrss.viewstyle;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 
-public abstract class MyScrollListener extends RecyclerView.OnScrollListener {
+public abstract class RecyclerScrollListener extends RecyclerView.OnScrollListener {
  
     private int toolbarOffset = 0;
     private int toolbarHeight;
  
-    public MyScrollListener(Context context) {
+    public RecyclerScrollListener(Context context) {
         int[] actionBarAttr = new int[] { android.R.attr.actionBarSize };
         TypedArray a = context.obtainStyledAttributes(actionBarAttr);
         toolbarHeight = (int) a.getDimension(0, 0) + 10;

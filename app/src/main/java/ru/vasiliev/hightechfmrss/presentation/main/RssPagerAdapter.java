@@ -18,22 +18,17 @@ public class RssPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        switch (ArticleCategory.of(i)) {
+        ArticleCategory category = ArticleCategory.of(i);
+        switch (category) {
             case ALL:
-                return RssFragment.newInstance();
             case CASES:
-                return RssFragment.newInstance();
             case IDEAS:
-                return RssFragment.newInstance();
             case BLOCKCHAIN:
-                return RssFragment.newInstance();
             case OPINIONS:
-                return RssFragment.newInstance();
             case TRENDS:
-                return RssFragment.newInstance();
-            case OTHER:
+                return RssFragment.newInstance(category.getId());
             default:
-                return RssFragment.newInstance();
+                return RssFragment.newInstance(ArticleCategory.ALL.getId());
         }
     }
 

@@ -16,7 +16,7 @@ public class RouterImpl implements Router {
     }
 
     @Override
-    public void openArticle(@NonNull AppCompatActivity activity, Article article) {
+    public void openArticle(@NonNull AppCompatActivity activity, @NonNull Article article) {
         ArticleActivity.Builder builder = new ArticleActivity.Builder();
         builder.setArticle(article);
         builder.start(activity);

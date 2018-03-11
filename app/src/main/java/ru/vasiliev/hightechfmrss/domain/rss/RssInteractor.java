@@ -2,6 +2,7 @@ package ru.vasiliev.hightechfmrss.domain.rss;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import ru.vasiliev.hightechfmrss.di.scope.RssScope;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
@@ -22,7 +23,15 @@ public class RssInteractor {
         mRssRepository = rssRepository;
     }
 
-    public Single<RssFeed> getFeed(boolean allowCache) {
-        return mRssRepository.getFeed(allowCache).compose(RxUtils.singleIoScheduler());
+    public Single<RssFeed> loadFeed(boolean allowCache) {
+        return mRssRepository.loadFeed(allowCache).compose(RxUtils.singleIoScheduler());
+    }
+
+    public Observable<RssFeed> getUpdates() {
+        return mRssRepository.getUpdates().compose(RxUtils.observableIoScheduler());
+    }
+
+    public boolean isLoading() {
+        return mRssRepository.isLoading();
     }
 }

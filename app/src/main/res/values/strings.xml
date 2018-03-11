@@ -10,6 +10,21 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <plurals name="plurals_hours_ago">
+        <item quantity="zero">Меньше часа назад</item>
+        <item quantity="one">Час назад</item>
+        <item quantity="two">%1$d часа назад</item>
+        <item quantity="few">%1$d часа назад</item>
+        <item quantity="many">%1$d часов назад</item>
+        <item quantity="other">%1$d часов назад</item>
+    </plurals>
+
+    <plurals name="plurals_minutes_ago">
+        <item quantity="zero">Меньше минуты назад</item>
+        <item quantity="one">Минуту назад</item>
+        <item quantity="two">%1$d минуты назад</item>
+        <item quantity="few">%1$d минуты назад</item>
+        <item quantity="many">%1$d минут назад</item>
+        <item quantity="other">%1$d минут назад</item>
+    </plurals>
 </resources>

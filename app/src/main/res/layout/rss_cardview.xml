@@ -36,15 +36,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp">
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
 
                 <TextView
                     android:id="@+id/article_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/category_backgroud"
+                    android:background="@drawable/article_category_background"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
                     android:textColor="@color/colorAccent"
@@ -64,7 +64,7 @@
 
                 <TextView
                     android:id="@+id/article_pub_time"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"

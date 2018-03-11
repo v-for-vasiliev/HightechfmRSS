@@ -1,4 +1,4 @@
-package ru.vasiliev.hightechfmrss.style;
+package ru.vasiliev.hightechfmrss.viewstyle;
 
 import android.content.Context;
 import android.graphics.Canvas;

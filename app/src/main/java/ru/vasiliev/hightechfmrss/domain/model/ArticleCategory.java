@@ -5,7 +5,7 @@ package ru.vasiliev.hightechfmrss.domain.model;
  */
 
 public enum ArticleCategory {
-    OTHER(-1), ALL(0), CASES(1), IDEAS(2), BLOCKCHAIN(3), OPINIONS(4), TRENDS(5);
+    ALL(0), CASES(1), IDEAS(2), BLOCKCHAIN(3), OPINIONS(4), TRENDS(5);
 
     private int id;
 
@@ -19,8 +19,6 @@ public enum ArticleCategory {
 
     public String getTitle() {
         switch (of(id)) {
-            case ALL:
-                return "Новости";
             case CASES:
                 return "Кейсы";
             case IDEAS:
@@ -31,12 +29,11 @@ public enum ArticleCategory {
                 return "Мнения";
             case TRENDS:
                 return "Тренды";
-            case OTHER:
+            case ALL:
             default:
-                return "Другое";
+                return "Новости";
         }
     }
-
 
     public static ArticleCategory of(int id) {
         for (ArticleCategory status : ArticleCategory.values()) {
@@ -44,6 +41,30 @@ public enum ArticleCategory {
                 return status;
             }
         }
-        return OTHER;
+        return ALL;
+    }
+
+    public static ArticleCategory of(String rssValue) {
+        if (rssValue.contains("Кейсы")) {
+            return CASES;
+        }
+        if (rssValue.contains("Идеи")) {
+            return IDEAS;
+        }
+        if (rssValue.contains("Блокчейн")) {
+            return BLOCKCHAIN;
+        }
+        if (rssValue.contains("Мнения")) {
+            return OPINIONS;
+        }
+        if (rssValue.contains("Тренды")) {
+            return TRENDS;
+        }
+        return ALL;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle();
     }
 }

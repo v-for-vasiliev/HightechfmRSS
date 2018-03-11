@@ -2,8 +2,8 @@ package ru.vasiliev.hightechfmrss.presentation.main;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -16,14 +16,18 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.R;
+import ru.vasiliev.hightechfmrss.viewstyle.RssViewPager;
 
 public class MainActivity extends MvpAppCompatActivity
-        implements MainView, NavigationView.OnNavigationItemSelectedListener {
+        implements MainView, RssPagerMainActivity, NavigationView.OnNavigationItemSelectedListener {
 
     public static final int OFFSCREEN_PAGE_LIMIT = 3;
 
     @BindView(R.id.rss_pager)
-    ViewPager mRssViewPager;
+    RssViewPager mRssViewPager;
+
+    @BindView(R.id.rss_tabs)
+    TabLayout mRssTabs;
 
     @InjectPresenter
     MainPresenter mMainPresenter;
@@ -52,10 +56,18 @@ public class MainActivity extends MvpAppCompatActivity
         initUi();
     }
 
+    @Override
+    @SuppressWarnings("all")
+    public void togglePager(boolean enabled) {
+        mRssViewPager.togglePaging(enabled);
+    }
+
     private void initUi() {
         mRssPagerAdapter = new RssPagerAdapter(getSupportFragmentManager());
         mRssViewPager.setAdapter(mRssPagerAdapter);
         mRssViewPager.setOffscreenPageLimit(OFFSCREEN_PAGE_LIMIT);
+        mRssTabs.setupWithViewPager(mRssViewPager);
+        togglePager(false);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,7 @@ import ru.vasiliev.hightechfmrss.utils.DateUtils;
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> implements
         ListPreloader.PreloadModelProvider<Article> {
     private RequestManager mGlideRequestManager;
+    private boolean mShowCategory;
     private List<Article> mArticleList;
     private RssItemSelectedListener mRssItemSelectedListener;
 
@@ -41,17 +43,20 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         TextView articleCategory;
         TextView articlePubTime;
 
-        ViewHolder(View v) {
+        ViewHolder(View v, boolean showCategory) {
             super(v);
             articleCover = v.findViewById(R.id.article_cover);
             articleTitle = v.findViewById(R.id.article_title);
             articleCategory = v.findViewById(R.id.article_category);
+            articleCategory.setVisibility(showCategory ? View.VISIBLE : View.GONE);
             articlePubTime = v.findViewById(R.id.article_pub_time);
         }
     }
 
-    RssAdapter(RequestManager glideRequestManager) {
+    RssAdapter(RequestManager glideRequestManager, boolean showCategory) {
         mGlideRequestManager = glideRequestManager;
+        mShowCategory = showCategory;
+
     }
 
     public void setData(List<Article> articleList) {
@@ -68,8 +73,7 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Create view, set the view's size, margins, paddings and layout parameters
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rss_cardview, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v, mShowCategory);
     }
 
     @Override
@@ -77,6 +81,20 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Replace the contents of the view with that element
         holder.articleTitle.setText(mArticleList.get(position).title);
         holder.articleCategory.setText(mArticleList.get(position).category);
+        String pubDate = mArticleList.get(position).pubDate;
+
+        if (DateUtils.withinLatestHours(pubDate)) {
+            holder.articlePubTime.setBackgroundResource(R.drawable.fresh_article_pubdate_background);
+            holder.articlePubTime.setTextAppearance(holder.itemView.getContext(),
+                    R.style.FreshArticlePubDate);
+            holder.articlePubTime.setPadding(15, 5, 15, 5);
+        } else {
+            holder.articlePubTime.setBackgroundColor(Color.TRANSPARENT);
+            holder.articlePubTime.setTextAppearance(holder.itemView.getContext(),
+                    R.style.RegularArticlePubDate);
+            holder.articlePubTime.setPadding(0, 0, 0, 0);
+        }
+
         holder.articlePubTime.setText(
                 DateUtils.toHumanReadable(mArticleList.get(position).pubDate));
 

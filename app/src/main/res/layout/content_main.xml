@@ -6,27 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <!-- Height must be set to wrap_content,
         otherwise fregments will adjust pager height to the same as fragment have -->
-    <android.support.v4.view.ViewPager
+    <ru.vasiliev.hightechfmrss.viewstyle.RssViewPager
         android:id="@+id/rss_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v4.view.PagerTabStrip
-            android:id="@+id/rss_pager_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textAppearance="@style/RssTabs"
-            android:textColor="@color/colorAccent"/>
-
-    </android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"/>
 
 </android.support.v4.widget.NestedScrollView>

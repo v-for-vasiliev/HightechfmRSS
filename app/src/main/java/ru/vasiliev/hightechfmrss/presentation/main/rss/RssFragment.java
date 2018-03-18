@@ -35,7 +35,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     private static final String PARAM_CATEGORY_ID = "PARAM_CATEGORY_ID";
 
-    private static final int PRELOAD_AHEAD_ITEMS = 5;
+    private static final int PRELOAD_AHEAD_ITEMS = 2;
 
     @BindView(R.id.rss_recycler)
     RecyclerView mRssRecycler;
@@ -131,10 +131,6 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
         mRssSwipe.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorAccent));
-
-        if (mRssPresenter.isFirstLaunch() && !mRssPresenter.isFeedLoaded()) {
-            toggleTabs(false);
-        }
     }
 
     @Override

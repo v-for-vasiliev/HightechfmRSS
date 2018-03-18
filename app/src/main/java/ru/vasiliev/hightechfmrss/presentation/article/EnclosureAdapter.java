@@ -7,15 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.Collections;
 import java.util.List;
 
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
 
@@ -30,12 +32,10 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView enclosureImage;
-        TextView enclosureIndex;
 
         ViewHolder(View v) {
             super(v);
             enclosureImage = v.findViewById(R.id.enclosure_image);
-            enclosureIndex = v.findViewById(R.id.enclosure_index);
         }
     }
 
@@ -62,8 +62,11 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Replace the contents of the view with that element
-        holder.enclosureIndex.setText(String.valueOf(position));
         mGlideRequestManager.load(mEnclosureList.get(position).url)
+                .apply(new RequestOptions().override(Target.SIZE_ORIGINAL,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
+                        R.drawable.image_not_found).error(
+                        R.drawable.image_not_found))
                 .into(holder.enclosureImage);
     }
 
@@ -86,6 +89,10 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
     @Override
     public RequestBuilder getPreloadRequestBuilder(Enclosure enclosure) {
         // Article may have no enclosures
-        return mGlideRequestManager.load(enclosure.url);
+        return mGlideRequestManager.load(enclosure.url).apply(
+                new RequestOptions().override(Target.SIZE_ORIGINAL,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
+                        R.drawable.image_not_found).error(
+                        R.drawable.image_not_found));
     }
 }

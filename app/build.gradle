@@ -28,6 +28,7 @@ android {
 
     buildTypes.all {
         buildConfigField "String", "API_BASE_URL", "\"https://hightech.fm\""
+        buildConfigField "int", "ENCLOSURE_IMG_HEIGHT", "600"
     }
 
     splits {

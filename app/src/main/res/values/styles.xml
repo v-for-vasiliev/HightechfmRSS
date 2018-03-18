@@ -9,11 +9,25 @@
         <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="AppTheme">
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleText</item>
+        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.SubTitleText</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleText"
+           parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.SubTitleText"
+           parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -21,6 +35,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
+
 
     <style name="RssTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/colorAccent</item>

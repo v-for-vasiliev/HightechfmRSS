@@ -84,7 +84,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         String pubDate = mArticleList.get(position).pubDate;
 
         if (DateUtils.withinLatestHours(pubDate)) {
-            holder.articlePubTime.setBackgroundResource(R.drawable.fresh_article_pubdate_background);
+            holder.articlePubTime.setBackgroundResource(
+                    R.drawable.fresh_article_pubdate_background);
             holder.articlePubTime.setTextAppearance(holder.itemView.getContext(),
                     R.style.FreshArticlePubDate);
             holder.articlePubTime.setPadding(15, 5, 15, 5);
@@ -104,8 +105,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
             }
         });
         mGlideRequestManager.load(mArticleList.get(position).enclosure.get(0).url)
-                .apply(new RequestOptions().placeholder(R.drawable.article_image_placeholder).error(
-                        R.drawable.article_image_placeholder))
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found).error(
+                        R.drawable.image_not_found))
                 .into(holder.articleCover);
     }
 
@@ -130,8 +131,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Article may have no enclosures
         boolean hasEnclosure = item.enclosure != null && item.enclosure.size() > 0;
         return mGlideRequestManager.load(
-                hasEnclosure ? item.enclosure.get(0).url : R.drawable.article_image_placeholder)
-                .apply(new RequestOptions().placeholder(R.drawable.article_image_placeholder).error(
-                        R.drawable.article_image_placeholder));
+                hasEnclosure ? item.enclosure.get(0).url : R.drawable.image_not_found)
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found).error(
+                        R.drawable.image_not_found));
     }
 }

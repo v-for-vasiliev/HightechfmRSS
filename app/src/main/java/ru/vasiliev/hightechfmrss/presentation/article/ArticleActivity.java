@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -30,7 +32,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     protected static final String KEY_ARTICLE = "article";
 
-    private static final int PRELOAD_AHEAD_ITEMS = 5;
+    private static final int PRELOAD_AHEAD_ITEMS = 2;
 
     @BindView(R.id.article_title)
     TextView mArticleTitle;
@@ -70,7 +72,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article);
+        setContentView(R.layout.activity_article_collapsing_toolbar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,6 +112,9 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false);
         mEnclosureRecycler.setLayoutManager(mLayoutManager);
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(mEnclosureRecycler);
 
         mGlideRequestManager = Glide.with(this);
         mEnclosureAdapter = new EnclosureAdapter(mGlideRequestManager);

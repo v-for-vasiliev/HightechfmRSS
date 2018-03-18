@@ -7,37 +7,18 @@
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/enclosure_card_view"
+        android:id="@+id/rss_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginBottom="5dp"
-        card_view:cardBackgroundColor="#00000000"
-        card_view:cardCornerRadius="0dp"
-        card_view:cardElevation="0dp">
+        card_view:cardBackgroundColor="@color/colorPrimaryDark">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/enclosure_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/enclosure_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/article_image_placeholder"/>
-
-            <TextView
-                android:id="@+id/enclosure_index"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
+            android:scaleType="fitXY"
+            android:src="@drawable/image_not_found"/>
 
     </android.support.v7.widget.CardView>
 

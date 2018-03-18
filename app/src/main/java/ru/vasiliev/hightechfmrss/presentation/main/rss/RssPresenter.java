@@ -131,6 +131,10 @@ public class RssPresenter extends MvpBasePresenter<RssView> {
         return mFeedLoaded;
     }
 
+    boolean isFirstLaunch() {
+        return mFirstLaunch;
+    }
+
     Router getRouter() {
         return mRouter;
     }

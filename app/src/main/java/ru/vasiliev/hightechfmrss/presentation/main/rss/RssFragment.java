@@ -132,7 +132,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
                 getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorAccent));
 
-        if (mRssPresenter.isLoading() && !mRssPresenter.isFeedLoaded()) {
+        if (mRssPresenter.isFirstLaunch() && !mRssPresenter.isFeedLoaded()) {
             toggleTabs(false);
         }
     }

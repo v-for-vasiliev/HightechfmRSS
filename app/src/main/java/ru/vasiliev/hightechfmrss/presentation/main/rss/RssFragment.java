@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -19,11 +18,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
@@ -35,7 +36,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     private static final String PARAM_CATEGORY_ID = "PARAM_CATEGORY_ID";
 
-    private static final int PRELOAD_AHEAD_ITEMS = 2;
+    private static final int PRELOAD_AHEAD_ITEMS = BuildConfig.PRELOAD_ARTICLES;
 
     @BindView(R.id.rss_recycler)
     RecyclerView mRssRecycler;
@@ -43,8 +44,13 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     @BindView(R.id.rss_swipetorefresh)
     SwipeRefreshLayout mRssSwipe;
 
+    /*
     @BindView(R.id.rss_loader)
     ProgressBar mRssLoader;
+    */
+
+    @BindView(R.id.rss_loader)
+    SpinKitView mRssLoader;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RequestManager mGlideRequestManager;
@@ -104,6 +110,16 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     }
 
     private void initUi() {
+        mRssSwipe.setOnRefreshListener(() -> mRssPresenter.getFeed(false));
+
+        mRssSwipe.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
+                getResources().getColor(R.color.colorAccent),
+                getResources().getColor(R.color.colorAccent));
+
+        initRssRecycler();
+    }
+
+    private void initRssRecycler() {
         mRssRecycler.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRssRecycler.setLayoutManager(mLayoutManager);
@@ -125,12 +141,6 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
             RssAdapter.ViewHolder vh = (RssAdapter.ViewHolder) holder;
             mGlideRequestManager.clear(vh.articleCover);
         });
-
-        mRssSwipe.setOnRefreshListener(() -> mRssPresenter.getFeed(false));
-
-        mRssSwipe.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
-                getResources().getColor(R.color.colorAccent),
-                getResources().getColor(R.color.colorAccent));
     }
 
     @Override

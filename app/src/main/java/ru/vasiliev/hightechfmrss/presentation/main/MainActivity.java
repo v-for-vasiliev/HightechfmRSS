@@ -15,13 +15,14 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.viewstyle.RssViewPager;
 
 public class MainActivity extends MvpAppCompatActivity
         implements MainView, RssPagerMainActivity, NavigationView.OnNavigationItemSelectedListener {
 
-    public static final int OFFSCREEN_PAGE_LIMIT = 3;
+    public static final int OFFSCREEN_PAGE_LIMIT = BuildConfig.PRELOAD_PAGER_FRAGMENTS;
 
     @BindView(R.id.rss_pager)
     RssViewPager mRssViewPager;
@@ -83,7 +84,7 @@ public class MainActivity extends MvpAppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

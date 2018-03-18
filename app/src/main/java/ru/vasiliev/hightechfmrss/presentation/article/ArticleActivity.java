@@ -11,6 +11,7 @@ import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
@@ -33,7 +35,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     protected static final String KEY_ARTICLE = "article";
 
-    private static final int PRELOAD_AHEAD_ITEMS = 2;
+    private static final int PRELOAD_AHEAD_ITEMS = BuildConfig.PRELOAD_ENCLOSURES;
 
     @BindView(R.id.article_title)
     TextView mArticleTitle;
@@ -115,10 +117,10 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         mArticleBody.setLinksClickable(true);
         mArticleBody.setMovementMethod(LinkMovementMethod.getInstance());
 
-        initRecycler();
+        initRssRecycler();
     }
 
-    private void initRecycler() {
+    private void initRssRecycler() {
         mEnclosureRecycler.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false);
@@ -143,6 +145,11 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
             EnclosureAdapter.ViewHolder vh = (EnclosureAdapter.ViewHolder) holder;
             mGlideRequestManager.clear(vh.enclosureImage);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

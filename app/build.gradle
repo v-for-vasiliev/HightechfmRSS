@@ -29,6 +29,9 @@ android {
     buildTypes.all {
         buildConfigField "String", "API_BASE_URL", "\"https://hightech.fm\""
         buildConfigField "int", "ENCLOSURE_IMG_HEIGHT", "600"
+        buildConfigField "int", "PRELOAD_PAGER_FRAGMENTS", "2"
+        buildConfigField "int", "PRELOAD_ARTICLES", "2"
+        buildConfigField "int", "PRELOAD_ENCLOSURES", "2"
     }
 
     splits {
@@ -82,4 +85,8 @@ dependencies {
     compile moxy.moxyAppCompat
     // JodaTime
     compile jodatime.jodatime
+    // -----
+    // UI
+    // -----
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
 }

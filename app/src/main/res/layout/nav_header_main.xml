@@ -18,14 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/hightech_logo_grayscale"/>
+        app:srcCompat="@drawable/hightech_logo_colored"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:textColor="@color/hightech_original_gray"
-        android:text="@string/email"/>
+        android:text="@string/email"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

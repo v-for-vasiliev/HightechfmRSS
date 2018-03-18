@@ -15,6 +15,7 @@
         <item name="actionMenuTextColor">@color/white</item>
     </style>
 
+
     <style name="AppTheme.ActionBar" parent="AppTheme">
         <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleText</item>
         <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.SubTitleText</item>
@@ -28,6 +29,10 @@
     <style name="AppTheme.ActionBar.SubTitleText"
            parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.NoTitle" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">

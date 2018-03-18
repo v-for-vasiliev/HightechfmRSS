@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
+import ru.vasiliev.hightechfmrss.utils.DateUtils;
 import timber.log.Timber;
 
 public class ArticleActivity extends MvpAppCompatActivity implements ArticleView {
@@ -36,6 +37,12 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     @BindView(R.id.article_title)
     TextView mArticleTitle;
+
+    @BindView(R.id.author_and_time)
+    TextView mAuthorAndTime;
+
+    @BindView(R.id.article_description)
+    TextView mArticleDescription;
 
     @BindView(R.id.article_body)
     TextView mArticleBody;
@@ -72,7 +79,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_collapsing_toolbar);
+        setContentView(R.layout.activity_article);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,8 +96,12 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     @Override
     public void showArticle(Article article) {
-        mArticleTitle.setText(Html.fromHtml(article.description));
+        mArticleTitle.setText(article.title);
+        mAuthorAndTime.setText(getString(R.string.author_and_time_format, article.author,
+                DateUtils.toHumanReadable(article.pubDate)));
+        mArticleDescription.setText(Html.fromHtml(article.description));
         mArticleBody.setText(Html.fromHtml(article.encoded));
+
 
         if (article.enclosure != null && article.enclosure.size() > 0) {
             mEnclosureAdapter.setData(article.enclosure);

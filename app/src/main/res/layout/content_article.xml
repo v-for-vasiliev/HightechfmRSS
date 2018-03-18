@@ -3,40 +3,63 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
-                  android:paddingBottom="8dp">
+                  android:paddingBottom="24dp"
+                  android:paddingTop="8dp">
 
         <TextView android:id="@+id/article_title"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:lineSpacingExtra="4dp"
-                  android:paddingEnd="8dp"
-                  android:paddingStart="8dp"
+                  android:paddingEnd="16dp"
+                  android:paddingStart="16dp"
                   android:paddingTop="8dp"
                   android:textColor="@color/black"
                   android:textSize="18sp"
-                  android:textStyle="bold"/>
+                  android:textStyle="bold"
+                  tools:text="@tools:sample/cities"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/enclosure_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"/>
+        <TextView android:id="@+id/author_and_time"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="4dp"
+                  android:paddingEnd="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingTop="8dp"
+                  android:textColor="@color/hightech_original_accent"
+                  android:textSize="12sp"
+                  android:textStyle="normal"
+                  tools:text="@tools:sample/cities"/>
+
+        <TextView android:id="@+id/article_description"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="4dp"
+                  android:paddingBottom="8dp"
+                  android:paddingEnd="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingTop="8dp"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  tools:text="@tools:sample/cities"/>
 
         <TextView android:id="@+id/article_body"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:lineSpacingExtra="8dp"
+                  android:lineSpacingExtra="4dp"
                   android:paddingBottom="24dp"
-                  android:paddingEnd="8dp"
-                  android:paddingStart="8dp"
-                  android:textSize="16sp"/>
+                  android:paddingEnd="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingTop="8dp"
+                  android:textSize="16sp"
+                  tools:text="@tools:sample/cities"/>
 
     </LinearLayout>
 

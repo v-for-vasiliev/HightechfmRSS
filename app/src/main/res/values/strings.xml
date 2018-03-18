@@ -27,4 +27,6 @@
         <item quantity="many">%1$d минут назад</item>
         <item quantity="other">%1$d минут назад</item>
     </plurals>
+
+    <string name="author_and_time_format">%1$s • %2$s</string>
 </resources>

@@ -2,6 +2,7 @@ package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -52,13 +53,38 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     @BindView(R.id.rss_loader)
     SpinKitView mRssLoader;
 
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RequestManager mGlideRequestManager;
+    FloatingActionButton mFloatingButton;
+
+    private RecyclerView.LayoutManager mRssRecyclerLayoutManager;
+    private RequestManager mRssRecyclerGlideRequestManager;
     private ViewPreloadSizeProvider<Article> mPreloadSizeProvider;
     private RssAdapter mRssAdapter;
 
     @InjectPresenter
     RssPresenter mRssPresenter;
+
+    RecyclerView.OnScrollListener mFabOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (((LinearLayoutManager) mRssRecyclerLayoutManager).findFirstVisibleItemPosition()
+                    == 0) {
+                mFloatingButton.hide();
+            } else {
+                mFloatingButton.show();
+            }
+            super.onScrolled(recyclerView, dx, dy);
+        }
+    };
+
+    /*
+    @ProvidePresenter
+    RssPresenter providePresenter() {
+        RssPresenter presenter = new RssPresenter();
+        presenter.setArticleCategory(ArticleCategory.of(
+                getArguments().getInt(PARAM_CATEGORY_ID, ArticleCategory.ALL.getId())));
+        return presenter;
+    }
+    */
 
     public RssFragment() {
     }
@@ -106,6 +132,11 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
                 // User triggers SwipeToReshresh in one fragment and switched to this fragment
                 mRssSwipe.setRefreshing(mRssPresenter.isLoading());
             }
+            initGoUpButton();
+        } else {
+            if (mRssRecycler != null) {
+                mRssRecycler.removeOnScrollListener(mFabOnScrollListener);
+            }
         }
     }
 
@@ -121,11 +152,11 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     private void initRssRecycler() {
         mRssRecycler.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRssRecycler.setLayoutManager(mLayoutManager);
+        mRssRecyclerLayoutManager = new LinearLayoutManager(getContext());
+        mRssRecycler.setLayoutManager(mRssRecyclerLayoutManager);
 
-        mGlideRequestManager = Glide.with(this);
-        mRssAdapter = new RssAdapter(mGlideRequestManager,
+        mRssRecyclerGlideRequestManager = Glide.with(this);
+        mRssAdapter = new RssAdapter(mRssRecyclerGlideRequestManager,
                 mRssPresenter.getArticleCategory() == ArticleCategory.ALL);
         mRssAdapter.setRssItemSelectedListener(this);
 
@@ -139,8 +170,16 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
         mRssRecycler.setRecyclerListener(holder -> {
             RssAdapter.ViewHolder vh = (RssAdapter.ViewHolder) holder;
-            mGlideRequestManager.clear(vh.articleCover);
+            mRssRecyclerGlideRequestManager.clear(vh.articleCover);
         });
+    }
+
+    @Override
+    public void initGoUpButton() {
+        mFloatingButton = getActivity().findViewById(R.id.fab);
+        mFloatingButton.setOnClickListener(view -> mRssRecyclerLayoutManager.scrollToPosition(0));
+        mFloatingButton.hide();
+        mRssRecycler.addOnScrollListener(mFabOnScrollListener);
     }
 
     @Override

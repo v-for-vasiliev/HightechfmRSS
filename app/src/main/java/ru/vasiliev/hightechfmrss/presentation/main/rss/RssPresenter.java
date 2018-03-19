@@ -58,6 +58,12 @@ public class RssPresenter extends MvpBasePresenter<RssView> {
         if (!mFirstLaunch && mRssInteractor.isLoading()) {
             getViewState().showLoader(mFeedLoaded);
         }
+        if (mFirstLaunch && mArticleCategory == ArticleCategory.ALL) {
+            // ViewPager instantiates several fragments at once. Since fragment's
+            // setUserVisibleHint() calling when already created fragment becomes visible, we need
+            // to call it manually in first ALL fragment
+            getViewState().initGoUpButton();
+        }
         mFirstLaunch = false;
     }
 

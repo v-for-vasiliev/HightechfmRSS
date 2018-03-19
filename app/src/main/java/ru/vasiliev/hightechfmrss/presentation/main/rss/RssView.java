@@ -15,6 +15,8 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface RssView extends MvpView {
 
+    void initGoUpButton();
+
     void showFeed(List<Article> articleList);
 
     void showLoader(boolean feedLoaded);

@@ -13,6 +13,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -29,6 +30,7 @@ import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
 import ru.vasiliev.hightechfmrss.utils.DateUtils;
+import ru.vasiliev.hightechfmrss.viewstyle.recyclerviewindicator.RecyclerViewIndicator;
 import timber.log.Timber;
 
 public class ArticleActivity extends MvpAppCompatActivity implements ArticleView {
@@ -51,6 +53,9 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     @BindView(R.id.enclosure_recycler)
     RecyclerView mEnclosureRecycler;
+
+    @BindView(R.id.enclosure_dots_indicator)
+    RecyclerViewIndicator mEnclosureViewIndicator;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RequestManager mGlideRequestManager;
@@ -108,6 +113,9 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         if (article.enclosure != null && article.enclosure.size() > 0) {
             mEnclosureAdapter.setData(article.enclosure);
             mEnclosureAdapter.notifyDataSetChanged();
+            if (article.enclosure.size() > 1) {
+                mEnclosureViewIndicator.setVisibility(View.VISIBLE); // it's invisible by default
+            }
         }
     }
 
@@ -145,6 +153,9 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
             EnclosureAdapter.ViewHolder vh = (EnclosureAdapter.ViewHolder) holder;
             mGlideRequestManager.clear(vh.enclosureImage);
         });
+
+        mEnclosureViewIndicator.setRecyclerView(mEnclosureRecycler);
+        mEnclosureViewIndicator.forceUpdateItemCount();
     }
 
     @Override

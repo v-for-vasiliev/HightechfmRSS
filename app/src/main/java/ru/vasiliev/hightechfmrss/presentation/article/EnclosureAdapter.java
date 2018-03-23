@@ -65,8 +65,8 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
         mGlideRequestManager.load(mEnclosureList.get(position).url)
                 .apply(new RequestOptions().override(Target.SIZE_ORIGINAL,
                         BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
-                        R.drawable.image_not_found).error(
-                        R.drawable.image_not_found))
+                        R.drawable.image_not_found_600p).error(
+                        R.drawable.image_not_found_600p))
                 .into(holder.enclosureImage);
     }
 
@@ -92,7 +92,7 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
         return mGlideRequestManager.load(enclosure.url).apply(
                 new RequestOptions().override(Target.SIZE_ORIGINAL,
                         BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
-                        R.drawable.image_not_found).error(
-                        R.drawable.image_not_found));
+                        R.drawable.image_not_found_600p).error(
+                        R.drawable.image_not_found_600p));
     }
 }

@@ -105,8 +105,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
             }
         });
         mGlideRequestManager.load(mArticleList.get(position).enclosure.get(0).url)
-                .apply(new RequestOptions().placeholder(R.drawable.image_not_found).error(
-                        R.drawable.image_not_found))
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_600p).error(
+                        R.drawable.image_not_found_600p))
                 .into(holder.articleCover);
     }
 
@@ -131,8 +131,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Article may have no enclosures
         boolean hasEnclosure = item.enclosure != null && item.enclosure.size() > 0;
         return mGlideRequestManager.load(
-                hasEnclosure ? item.enclosure.get(0).url : R.drawable.image_not_found)
-                .apply(new RequestOptions().placeholder(R.drawable.image_not_found).error(
-                        R.drawable.image_not_found));
+                hasEnclosure ? item.enclosure.get(0).url : R.drawable.image_not_found_600p)
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_600p).error(
+                        R.drawable.image_not_found_600p));
     }
 }

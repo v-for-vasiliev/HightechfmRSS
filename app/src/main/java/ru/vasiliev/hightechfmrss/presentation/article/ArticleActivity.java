@@ -57,6 +57,8 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     @BindView(R.id.enclosure_dots_indicator)
     RecyclerViewIndicator mEnclosureViewIndicator;
 
+    Menu mMenu;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private RequestManager mGlideRequestManager;
     private ViewPreloadSizeProvider<Enclosure> mPreloadSizeProvider;
@@ -98,7 +100,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
         initUi();
 
-        mArticlePresenter.showArticle();
+        mArticlePresenter.loadArticle();
     }
 
     @Override
@@ -109,7 +111,6 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         mArticleDescription.setText(Html.fromHtml(article.description));
         mArticleBody.setText(Html.fromHtml(article.encoded));
 
-
         if (article.enclosure != null && article.enclosure.size() > 0) {
             mEnclosureAdapter.setData(article.enclosure);
             mEnclosureAdapter.notifyDataSetChanged();
@@ -117,6 +118,17 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
                 mEnclosureViewIndicator.setVisibility(View.VISIBLE); // it's invisible by default
             }
         }
+    }
+
+    @Override
+    public void updateMenu(boolean isBookmarked) {
+        if (mMenu == null) {
+            return;
+        }
+        MenuItem bookmarkItem = mMenu.findItem(R.id.menu_bookmark);
+        bookmarkItem.setIcon(isBookmarked ? R.drawable.ic_menu_bookmark_white
+                : R.drawable.ic_menu_bookmark_border_white);
+        bookmarkItem.setVisible(true);
     }
 
     private void initUi() {
@@ -160,7 +172,16 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.article_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem bookmarkItem = menu.findItem(R.id.menu_bookmark);
+        bookmarkItem.setVisible(false);
+        mArticlePresenter.checkIsBookmarked();
+        return super.onPrepareOptionsMenu(mMenu = menu);
     }
 
     @Override
@@ -168,6 +189,10 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.menu_share:
+                startActivity(Intent.createChooser(mArticlePresenter.createShareIntent(),
+                        getString(R.string.article_action_share_tooltip)));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

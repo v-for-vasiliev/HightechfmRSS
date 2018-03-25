@@ -4,12 +4,15 @@
 
     <!-- Article -->
     <string name="article_title">Публикация</string>
+    <string name="author_and_time_format">%1$s • %2$s</string>
+    <string name="article_action_share_tooltip">Отправить</string>
+    <string name="article_action_bookmark_tooltip">Отправить</string>
 
+    <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-
+    <!-- Date and time -->
     <plurals name="plurals_hours_ago">
         <item quantity="zero">Меньше часа назад</item>
         <item quantity="one">Час назад</item>
@@ -28,5 +31,4 @@
         <item quantity="other">%1$d минут назад</item>
     </plurals>
 
-    <string name="author_and_time_format">%1$s • %2$s</string>
 </resources>

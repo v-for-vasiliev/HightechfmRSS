@@ -74,7 +74,7 @@ public class RssPresenter extends MvpBasePresenter<RssView> {
                 mRssInteractor.isLoading());
         mFirstLaunch = true;
         if (!mRssInteractor.isLoading()) {
-            getFeed(true);
+            loadFeed(true);
         } else {
             subscribeToUpdates();
         }
@@ -101,8 +101,8 @@ public class RssPresenter extends MvpBasePresenter<RssView> {
         getViewState().showError(t.getMessage());
     }
 
-    void getFeed(boolean allowCache) {
-        Timber.d("Presenter(%s) - getFeed(feedLoaded = %b)", mArticleCategory, mFeedLoaded);
+    void loadFeed(boolean allowCache) {
+        Timber.d("Presenter(%s) - loadFeed(feedLoaded = %b)", mArticleCategory, mFeedLoaded);
 
         getViewState().showLoader(mFeedLoaded);
 

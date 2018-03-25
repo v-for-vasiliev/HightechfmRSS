@@ -141,7 +141,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     }
 
     private void initUi() {
-        mRssSwipe.setOnRefreshListener(() -> mRssPresenter.getFeed(false));
+        mRssSwipe.setOnRefreshListener(() -> mRssPresenter.loadFeed(false));
 
         mRssSwipe.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorAccent),

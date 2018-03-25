@@ -1,7 +1,7 @@
 package ru.vasiliev.hightechfmrss.presentation.article;
 
 import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import ru.vasiliev.hightechfmrss.domain.model.Article;
@@ -12,6 +12,9 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
 
 public interface ArticleView extends MvpView {
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
+    @StateStrategyType(AddToEndSingleStrategy.class)
     void showArticle(Article article);
+
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void updateMenu(boolean isBookmarked);
 }

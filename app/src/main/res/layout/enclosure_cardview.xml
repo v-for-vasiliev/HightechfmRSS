@@ -17,8 +17,9 @@
             android:id="@+id/enclosure_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/image_not_found_600p"/>
+            android:src="@drawable/image_not_found_1210x600"/>
 
     </android.support.v7.widget.CardView>
 

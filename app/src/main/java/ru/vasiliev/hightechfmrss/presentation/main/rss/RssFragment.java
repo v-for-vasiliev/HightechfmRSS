@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,7 @@ import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
 import ru.vasiliev.hightechfmrss.presentation.main.RssPagerMainActivity;
+import ru.vasiliev.hightechfmrss.viewstyle.TopSnapLayoutManager;
 import timber.log.Timber;
 
 public class RssFragment extends MvpAppCompatFragment implements RssView,
@@ -55,7 +55,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     FloatingActionButton mFloatingButton;
 
-    private RecyclerView.LayoutManager mRssRecyclerLayoutManager;
+    private TopSnapLayoutManager mRssRecyclerLayoutManager;
     private RequestManager mRssRecyclerGlideRequestManager;
     private ViewPreloadSizeProvider<Article> mPreloadSizeProvider;
     private RssAdapter mRssAdapter;
@@ -66,7 +66,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     RecyclerView.OnScrollListener mFabOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            if (((LinearLayoutManager) mRssRecyclerLayoutManager).findFirstVisibleItemPosition()
+            if (mRssRecyclerLayoutManager.findFirstVisibleItemPosition()
                     == 0) {
                 mFloatingButton.hide();
             } else {
@@ -152,7 +152,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
 
     private void initRssRecycler() {
         mRssRecycler.setHasFixedSize(true);
-        mRssRecyclerLayoutManager = new LinearLayoutManager(getContext());
+        mRssRecyclerLayoutManager = new TopSnapLayoutManager(getContext());
         mRssRecycler.setLayoutManager(mRssRecyclerLayoutManager);
 
         mRssRecyclerGlideRequestManager = Glide.with(this);
@@ -177,7 +177,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     @Override
     public void initGoUpButton() {
         mFloatingButton = getActivity().findViewById(R.id.fab);
-        mFloatingButton.setOnClickListener(view -> mRssRecyclerLayoutManager.scrollToPosition(0));
+        mFloatingButton.setOnClickListener(view -> mRssRecycler.smoothScrollToPosition(0));
         mFloatingButton.hide();
         mRssRecycler.addOnScrollListener(mFabOnScrollListener);
     }

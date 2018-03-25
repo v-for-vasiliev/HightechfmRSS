@@ -76,7 +76,8 @@ public class Article implements Serializable, Comparable<Article> {
     @Override
     public int compareTo(@NonNull Article article) {
         try {
-            return DateUtils.parse(pubDate).compareTo(DateUtils.parse(article.pubDate));
+            return DateUtils.parseToLocalTimeZone(pubDate).compareTo(
+                    DateUtils.parseToLocalTimeZone(article.pubDate));
         } catch (Throwable t) {
             Timber.e(t, "");
             return 0;

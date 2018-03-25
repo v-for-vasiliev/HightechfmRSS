@@ -28,6 +28,7 @@ android {
 
     buildTypes.all {
         buildConfigField "String", "API_BASE_URL", "\"https://hightech.fm\""
+        buildConfigField "int", "ENCLOSURE_IMG_WIDTH", "1210"
         buildConfigField "int", "ENCLOSURE_IMG_HEIGHT", "600"
         buildConfigField "int", "PRELOAD_PAGER_FRAGMENTS", "2"
         buildConfigField "int", "PRELOAD_ARTICLES", "2"

@@ -12,7 +12,6 @@ import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,10 +62,11 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Replace the contents of the view with that element
         mGlideRequestManager.load(mEnclosureList.get(position).url)
-                .apply(new RequestOptions().override(Target.SIZE_ORIGINAL,
-                        BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
-                        R.drawable.image_not_found_600p).error(
-                        R.drawable.image_not_found_600p))
+                .apply(new RequestOptions().fitCenter().placeholder(
+                        R.drawable.image_not_found_1210x600).error(
+                        R.drawable.image_not_found_1210x600).override(
+                        BuildConfig.ENCLOSURE_IMG_WIDTH,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT))
                 .into(holder.enclosureImage);
     }
 
@@ -90,9 +90,10 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
     public RequestBuilder getPreloadRequestBuilder(Enclosure enclosure) {
         // Article may have no enclosures
         return mGlideRequestManager.load(enclosure.url).apply(
-                new RequestOptions().override(Target.SIZE_ORIGINAL,
-                        BuildConfig.ENCLOSURE_IMG_HEIGHT).fitCenter().placeholder(
-                        R.drawable.image_not_found_600p).error(
-                        R.drawable.image_not_found_600p));
+                new RequestOptions().fitCenter().placeholder(
+                        R.drawable.image_not_found_1210x600).error(
+                        R.drawable.image_not_found_1210x600).override(
+                        BuildConfig.ENCLOSURE_IMG_WIDTH,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT));
     }
 }

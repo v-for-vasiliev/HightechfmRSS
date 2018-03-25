@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Collections;
 import java.util.List;
 
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.utils.DateUtils;
@@ -105,8 +107,9 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
             }
         });
         mGlideRequestManager.load(mArticleList.get(position).enclosure.get(0).url)
-                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_600p).error(
-                        R.drawable.image_not_found_600p))
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_1210x600).error(
+                        R.drawable.image_not_found_1210x600).override(BuildConfig.ENCLOSURE_IMG_WIDTH,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.articleCover);
     }
 
@@ -131,8 +134,9 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ViewHolder> impl
         // Article may have no enclosures
         boolean hasEnclosure = item.enclosure != null && item.enclosure.size() > 0;
         return mGlideRequestManager.load(
-                hasEnclosure ? item.enclosure.get(0).url : R.drawable.image_not_found_600p)
-                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_600p).error(
-                        R.drawable.image_not_found_600p));
+                hasEnclosure ? item.enclosure.get(0).url : R.drawable.image_not_found_1210x600)
+                .apply(new RequestOptions().placeholder(R.drawable.image_not_found_1210x600).error(
+                        R.drawable.image_not_found_1210x600).override(BuildConfig.ENCLOSURE_IMG_WIDTH,
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).diskCacheStrategy(DiskCacheStrategy.ALL));
     }
 }

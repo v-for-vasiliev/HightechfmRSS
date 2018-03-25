@@ -11,28 +11,8 @@
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
         <item name="actionMenuTextColor">@color/white</item>
-    </style>
-
-
-    <style name="AppTheme.ActionBar" parent="AppTheme">
-        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleText</item>
-        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.SubTitleText</item>
-    </style>
-
-    <style name="AppTheme.ActionBar.TitleText"
-           parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="AppTheme.ActionBar.SubTitleText"
-           parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="AppTheme.ActionBar.NoTitle" parent="AppTheme">
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -41,6 +21,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
 
+    <style name="ToolbarTextAppearance" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
     <style name="RssTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/colorAccent</item>
@@ -54,7 +39,7 @@
 
     <style name="RssTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -70,5 +55,6 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/hightech_original_gray</item>
     </style>
+
 
 </resources>

@@ -134,6 +134,8 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     private void initUi() {
         mArticleTitle.setLinksClickable(true);
         mArticleTitle.setMovementMethod(LinkMovementMethod.getInstance());
+        mArticleDescription.setLinksClickable(true);
+        mArticleDescription.setMovementMethod(LinkMovementMethod.getInstance());
         mArticleBody.setLinksClickable(true);
         mArticleBody.setMovementMethod(LinkMovementMethod.getInstance());
 

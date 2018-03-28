@@ -66,7 +66,7 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
                         R.drawable.image_not_found_1210x600).error(
                         R.drawable.image_not_found_1210x600).override(
                         BuildConfig.ENCLOSURE_IMG_WIDTH,
-                        BuildConfig.ENCLOSURE_IMG_HEIGHT))
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).centerCrop())
                 .into(holder.enclosureImage);
     }
 
@@ -94,6 +94,6 @@ public class EnclosureAdapter extends RecyclerView.Adapter<EnclosureAdapter.View
                         R.drawable.image_not_found_1210x600).error(
                         R.drawable.image_not_found_1210x600).override(
                         BuildConfig.ENCLOSURE_IMG_WIDTH,
-                        BuildConfig.ENCLOSURE_IMG_HEIGHT));
+                        BuildConfig.ENCLOSURE_IMG_HEIGHT).centerCrop());
     }
 }

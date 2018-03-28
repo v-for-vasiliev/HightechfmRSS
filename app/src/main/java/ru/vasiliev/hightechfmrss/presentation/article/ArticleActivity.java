@@ -93,6 +93,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         ButterKnife.bind(this);
 

@@ -3,6 +3,7 @@ package ru.vasiliev.hightechfmrss.presentation.article;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -30,6 +31,7 @@ import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.Enclosure;
 import ru.vasiliev.hightechfmrss.utils.DateUtils;
+import ru.vasiliev.hightechfmrss.viewstyle.FadingToolbarOffsetChangedListener;
 import ru.vasiliev.hightechfmrss.viewstyle.recyclerviewindicator.RecyclerViewIndicator;
 import timber.log.Timber;
 
@@ -51,11 +53,16 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     @BindView(R.id.article_body)
     TextView mArticleBody;
 
+    @BindView(R.id.toolbar_layout)
+    AppBarLayout mToolbarLayout;
+
     @BindView(R.id.enclosure_recycler)
     RecyclerView mEnclosureRecycler;
 
     @BindView(R.id.enclosure_dots_indicator)
     RecyclerViewIndicator mEnclosureViewIndicator;
+
+    Toolbar mToolbar;
 
     Menu mMenu;
 
@@ -90,8 +97,8 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -141,6 +148,9 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         mArticleBody.setMovementMethod(LinkMovementMethod.getInstance());
 
         initRssRecycler();
+
+        mToolbarLayout.addOnOffsetChangedListener(
+                new FadingToolbarOffsetChangedListener(this, getSupportActionBar()));
     }
 
     private void initRssRecycler() {

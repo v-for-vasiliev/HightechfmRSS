@@ -1,8 +1,13 @@
 package ru.vasiliev.hightechfmrss;
 
+import com.facebook.stetho.Stetho;
+
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import ru.vasiliev.hightechfmrss.data.db.AppDatabase;
+import ru.vasiliev.hightechfmrss.di.DatabaseModule;
 import ru.vasiliev.hightechfmrss.di.NetworkModule;
 import ru.vasiliev.hightechfmrss.di.app.AppComponent;
 import ru.vasiliev.hightechfmrss.di.app.AppModule;
@@ -21,10 +26,25 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        init();
+    }
+
+    private void init() {
+        // Application database
+        AppDatabase db = Room
+                .databaseBuilder(getApplicationContext(), AppDatabase.class, "hightechfm.db")
+                .build();
+
+        // Dagger application component
+        sAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this))
+                .databaseModule(new DatabaseModule(db))
+                .networkModule(new NetworkModule(BuildConfig.API_BASE_URL)).build();
+
+        // Timber loggin
         Timber.plant(new Timber.DebugTree());
 
-        sAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).networkModule(
-                new NetworkModule(BuildConfig.API_BASE_URL)).build();
+        // Stetho debug tools
+        Stetho.initializeWithDefaults(this);
     }
 
     public static Context getContext() {

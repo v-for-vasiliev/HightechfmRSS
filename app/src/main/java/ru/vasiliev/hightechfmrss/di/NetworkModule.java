@@ -1,5 +1,6 @@
 package ru.vasiliev.hightechfmrss.di;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -22,15 +23,23 @@ public class NetworkModule {
         mBaseUrl = baseUrl;
     }
 
+    @Named("release")
     @Singleton
     @Provides
     public OkHttpClient provideNetworkClient() {
         return ClientFactory.getDefaultClient();
     }
 
+    @Named("debug")
     @Singleton
     @Provides
-    public Retrofit provideRetrofit(OkHttpClient client) {
+    public OkHttpClient getDefaultClientWithStetho() {
+        return ClientFactory.getDefaultClientWithStetho();
+    }
+
+    @Singleton
+    @Provides
+    public Retrofit provideRetrofit(@Named("release") OkHttpClient client) {
         return RetrofitFactory.getRssRetrofit(mBaseUrl, client);
     }
 }

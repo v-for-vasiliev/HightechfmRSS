@@ -93,6 +93,8 @@ dependencies {
     // Stetho
     compile stetho.stetho
     compile stetho.stethoOkHttp
+    // Gson
+    compile gson.gson
 
     // -----
     // UI

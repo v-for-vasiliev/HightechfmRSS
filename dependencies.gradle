@@ -16,7 +16,8 @@ ext {
             moxy       : '1.5.3',
             jodatime   : '2.9.9',
             room       : '1.1.0-beta1',
-            stetho     : '1.5.0'
+            stetho     : '1.5.0',
+            gson       : '2.8.0'
     ]
 
     dagger2 = [
@@ -79,5 +80,9 @@ ext {
     stetho = [
             stetho      : "com.facebook.stetho:stetho:${versions.stetho}", // compile
             stethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${versions.stetho}" // compile
+    ]
+
+    gson = [
+            gson: "com.google.code.gson:gson:${versions.gson}" // compile
     ]
 }

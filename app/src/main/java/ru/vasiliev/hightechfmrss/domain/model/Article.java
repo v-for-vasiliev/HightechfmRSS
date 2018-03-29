@@ -7,14 +7,15 @@ import org.simpleframework.xml.NamespaceList;
 import org.simpleframework.xml.Root;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.List;
 
 import ru.vasiliev.hightechfmrss.utils.DateUtils;
+import ru.vasiliev.hightechfmrss.utils.RssTypeConverters;
 import timber.log.Timber;
 
 /**
@@ -31,14 +32,13 @@ import timber.log.Timber;
 @Entity(tableName = "articles")
 public class Article implements Serializable, Comparable<Article> {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-
     @Element(name = "title")
     public String title;
 
+    @NonNull
+    @PrimaryKey
     @Element(name = "link")
-    public String link;
+    public String link = "unknown";
 
     @Element(name = "description")
     public String description;
@@ -49,7 +49,7 @@ public class Article implements Serializable, Comparable<Article> {
     @Element(name = "category", required = false)
     public String category;
 
-    @Ignore
+    @TypeConverters(RssTypeConverters.class)
     @ElementList(entry = "enclosure", inline = true, required = false)
     public List<Enclosure> enclosure;
 

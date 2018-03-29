@@ -1,12 +1,15 @@
 package ru.vasiliev.hightechfmrss.domain.model;
 
-import android.support.annotation.NonNull;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.NamespaceList;
 import org.simpleframework.xml.Root;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,9 +27,13 @@ import timber.log.Timber;
         @Namespace(prefix = "dc", reference = "http://purl.org/dc/elements/1.1/"),
         @Namespace(prefix = "media", reference = "http://search.yahoo.com/mrss/"),
         @Namespace(prefix = "atom", reference = "http://www.w3.org/2005/Atom"),
-        @Namespace(prefix = "georss", reference = "http://www.georss.org/georss")
-})
+        @Namespace(prefix = "georss", reference = "http://www.georss.org/georss")})
+@Entity(tableName = "articles")
 public class Article implements Serializable, Comparable<Article> {
+
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
     @Element(name = "title")
     public String title;
 
@@ -42,6 +49,7 @@ public class Article implements Serializable, Comparable<Article> {
     @Element(name = "category", required = false)
     public String category;
 
+    @Ignore
     @ElementList(entry = "enclosure", inline = true, required = false)
     public List<Enclosure> enclosure;
 
@@ -59,25 +67,18 @@ public class Article implements Serializable, Comparable<Article> {
 
     @Override
     public String toString() {
-        return "Article{" +
-                "title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", description='" + description + '\'' +
-                ", author='" + author + '\'' +
-                ", category='" + category + '\'' +
-                ", enclosure=" + enclosure +
-                ", pubDate='" + pubDate + '\'' +
-                ", encoded='" + encoded + '\'' +
-                ", pdalink='" + pdalink + '\'' +
-                ", rating='" + rating + '\'' +
-                '}';
+        return "Article{" + "title='" + title + '\'' + ", link='" + link + '\'' + ", description='"
+                + description + '\'' + ", author='" + author + '\'' + ", category='" + category
+                + '\'' + ", enclosure=" + enclosure + ", pubDate='" + pubDate + '\'' + ", encoded='"
+                + encoded + '\'' + ", pdalink='" + pdalink + '\'' + ", rating='" + rating + '\''
+                + '}';
     }
 
     @Override
     public int compareTo(@NonNull Article article) {
         try {
-            return DateUtils.parseToLocalTimeZone(pubDate).compareTo(
-                    DateUtils.parseToLocalTimeZone(article.pubDate));
+            return DateUtils.parseToLocalTimeZone(pubDate)
+                    .compareTo(DateUtils.parseToLocalTimeZone(article.pubDate));
         } catch (Throwable t) {
             Timber.e(t, "");
             return 0;

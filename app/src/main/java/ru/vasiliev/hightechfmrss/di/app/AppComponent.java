@@ -4,7 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.vasiliev.hightechfmrss.App;
+import ru.vasiliev.hightechfmrss.data.db.AppDatabase;
 import ru.vasiliev.hightechfmrss.di.ApiModule;
+import ru.vasiliev.hightechfmrss.di.DatabaseModule;
 import ru.vasiliev.hightechfmrss.di.NetworkModule;
 import ru.vasiliev.hightechfmrss.di.RepositoryModule;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
@@ -18,10 +20,13 @@ import ru.vasiliev.hightechfmrss.repository.rss.RssRepository;
  */
 
 @Singleton
-@Component(modules = {AppModule.class, NetworkModule.class, ApiModule.class, RepositoryModule.class})
+@Component(modules = {AppModule.class, DatabaseModule.class, NetworkModule.class, ApiModule.class,
+        RepositoryModule.class})
 public interface AppComponent {
 
     App getApp();
+
+    AppDatabase getAppDatabase();
 
     HightechFmApi getHightechFmApi();
 

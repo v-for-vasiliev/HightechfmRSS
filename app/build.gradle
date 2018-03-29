@@ -86,6 +86,14 @@ dependencies {
     compile moxy.moxyAppCompat
     // JodaTime
     compile jodatime.jodatime
+    // Room
+    implementation room.room
+    annotationProcessor room.roomAnnotationProcessor
+    implementation room.roomRxJava
+    // Stetho
+    compile stetho.stetho
+    compile stetho.stethoOkHttp
+
     // -----
     // UI
     // -----

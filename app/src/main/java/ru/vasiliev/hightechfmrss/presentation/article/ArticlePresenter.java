@@ -1,18 +1,18 @@
 package ru.vasiliev.hightechfmrss.presentation.article;
 
-import android.content.Intent;
-
 import com.arellomobile.mvp.InjectViewState;
+
+import android.content.Intent;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableMaybeObserver;
 import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
 import ru.vasiliev.hightechfmrss.domain.article.ArticleInteractor;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
-import ru.vasiliev.hightechfmrss.utils.RxUtils;
 import timber.log.Timber;
 
 /**
@@ -26,6 +26,8 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
     ArticleInteractor mArticleInteractor;
 
     private Article mArticle;
+
+    private boolean mBookmarked = false;
 
     ArticlePresenter() {
         ArticleComponent component = App.getAppComponent().plusArticleComponent();
@@ -49,22 +51,62 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
         return shareIntent;
     }
 
+    public boolean isBookmarked() {
+        return mBookmarked;
+    }
+
     public void checkIsBookmarked() {
-        addSubscription(Observable.fromCallable(() -> {
-            Thread.sleep(1000);
-            return false;
-        }).compose(RxUtils.observableIoScheduler()).subscribe(
-                aBoolean -> getViewState().updateMenu(aBoolean), throwable -> {
-                    getViewState().updateMenu(false);
-                    Timber.e(throwable, "");
-                }));
+        mArticleInteractor.findByLink(mArticle.link)
+                .subscribe(new DisposableMaybeObserver<Article>() {
+                    @Override
+                    public void onSuccess(Article article) {
+                        getViewState().updateMenu(mBookmarked = true);
+                        Timber.d("Bookmark found");
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        getViewState().updateMenu(mBookmarked = false);
+                        Timber.e(throwable, "");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        getViewState().updateMenu(mBookmarked = false);
+                        Timber.d("Bookmark not found");
+                    }
+                });
     }
 
     public void bookmarkArticle() {
+        mArticleInteractor.saveBookmark(mArticle).subscribe(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+                getViewState().updateMenu(mBookmarked = true);
+                Timber.d("Bookmark added");
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                // Error dialog
+                Timber.d("Error add bookmark");
+            }
+        });
     }
 
     public void removeFromBookmarks() {
+        mArticleInteractor.deleteBookmark(mArticle).subscribe(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+                getViewState().updateMenu(mBookmarked = false);
+                Timber.d("Bookmark removed");
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                // Error dialog
+                Timber.d("Error remove bookmark");
+            }
+        });
     }
 }

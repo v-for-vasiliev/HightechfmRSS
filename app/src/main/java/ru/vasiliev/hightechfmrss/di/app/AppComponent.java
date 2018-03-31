@@ -12,6 +12,7 @@ import ru.vasiliev.hightechfmrss.di.RepositoryModule;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
 import ru.vasiliev.hightechfmrss.di.main.MainComponent;
 import ru.vasiliev.hightechfmrss.di.rss.RssComponent;
+import ru.vasiliev.hightechfmrss.repository.bookmarks.BookmarksRepository;
 import ru.vasiliev.hightechfmrss.repository.datasource.HightechFmApi;
 import ru.vasiliev.hightechfmrss.repository.rss.RssRepository;
 
@@ -31,6 +32,8 @@ public interface AppComponent {
     HightechFmApi getHightechFmApi();
 
     RssRepository getRssRepository();
+
+    BookmarksRepository getBookmarksRepository();
 
     MainComponent plusHomeComponent();
 

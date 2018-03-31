@@ -196,6 +196,13 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
                 startActivity(Intent.createChooser(mArticlePresenter.createShareIntent(),
                         getString(R.string.article_action_share_tooltip)));
                 return true;
+            case R.id.menu_bookmark:
+                if (mArticlePresenter.isBookmarked()) {
+                    mArticlePresenter.removeFromBookmarks();
+                } else {
+                    mArticlePresenter.bookmarkArticle();
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

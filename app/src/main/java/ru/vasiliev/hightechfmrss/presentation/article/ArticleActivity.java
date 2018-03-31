@@ -1,6 +1,13 @@
 package ru.vasiliev.hightechfmrss.presentation.article;
 
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
+import com.bumptech.glide.util.ViewPreloadSizeProvider;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
-import com.bumptech.glide.util.ViewPreloadSizeProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,8 +60,11 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
     Menu mMenu;
 
     private RecyclerView.LayoutManager mLayoutManager;
+
     private RequestManager mGlideRequestManager;
+
     private ViewPreloadSizeProvider<Enclosure> mPreloadSizeProvider;
+
     private EnclosureAdapter mEnclosureAdapter;
 
     @InjectPresenter
@@ -131,6 +134,22 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         bookmarkItem.setVisible(true);
     }
 
+    @Override
+    public void enableMenuItem(int id) {
+        MenuItem item = mMenu.findItem(R.id.menu_bookmark);
+        if (item != null) {
+            item.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void disableMenuItem(int id) {
+        MenuItem item = mMenu.findItem(R.id.menu_bookmark);
+        if (item != null) {
+            item.setEnabled(false);
+        }
+    }
+
     private void initUi() {
         mArticleTitle.setLinksClickable(true);
         mArticleTitle.setMovementMethod(LinkMovementMethod.getInstance());
@@ -144,8 +163,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
     private void initRssRecycler() {
         mEnclosureRecycler.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
-                false);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mEnclosureRecycler.setLayoutManager(mLayoutManager);
 
         SnapHelper snapHelper = new PagerSnapHelper();
@@ -156,8 +174,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
 
         mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
 
-        RecyclerViewPreloader<Enclosure> preloader = new RecyclerViewPreloader<>(
-                Glide.with(this),
+        RecyclerViewPreloader<Enclosure> preloader = new RecyclerViewPreloader<>(Glide.with(this),
                 mEnclosureAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);
 
         mEnclosureRecycler.setAdapter(mEnclosureAdapter);
@@ -195,6 +212,14 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
             case R.id.menu_share:
                 startActivity(Intent.createChooser(mArticlePresenter.createShareIntent(),
                         getString(R.string.article_action_share_tooltip)));
+                return true;
+            case R.id.menu_bookmark:
+                disableMenuItem(R.id.menu_bookmark);
+                if (mArticlePresenter.isBookmarked()) {
+                    mArticlePresenter.removeFromBookmarks();
+                } else {
+                    mArticlePresenter.bookmarkArticle();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

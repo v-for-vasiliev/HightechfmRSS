@@ -7,6 +7,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.data.network.ClientFactory;
 import ru.vasiliev.hightechfmrss.data.network.RetrofitFactory;
 
@@ -39,7 +40,7 @@ public class NetworkModule {
 
     @Singleton
     @Provides
-    public Retrofit provideRetrofit(@Named("release") OkHttpClient client) {
+    public Retrofit provideRetrofit(@Named(BuildConfig.NETWORK_TRACE_STATE) OkHttpClient client) {
         return RetrofitFactory.getRssRetrofit(mBaseUrl, client);
     }
 }

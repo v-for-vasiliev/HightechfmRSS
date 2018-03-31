@@ -35,6 +35,32 @@ android {
         buildConfigField "int", "PRELOAD_ENCLOSURES", "2"
     }
 
+    buildTypes {
+        release {
+            applicationIdSuffix ".release"
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "NETWORK_TRACE_STATE", "release"
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            buildConfigField "String", "NETWORK_TRACE_STATE", "\"debug\""
+        }
+
+        /**
+         * The `initWith` property allows you to copy configurations from other build types,
+         * then configure just the settings you want to change. This one copies the debug build
+         * type, and then changes the manifest placeholder and application ID.
+         */
+        staging {
+            initWith debug
+            applicationIdSuffix ".debugStaging"
+        }
+    }
+
     splits {
         abi {
             enable true

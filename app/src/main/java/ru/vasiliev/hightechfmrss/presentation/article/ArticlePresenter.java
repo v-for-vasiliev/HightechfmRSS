@@ -3,12 +3,14 @@ package ru.vasiliev.hightechfmrss.presentation.article;
 import com.arellomobile.mvp.InjectViewState;
 
 import android.content.Intent;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableMaybeObserver;
 import ru.vasiliev.hightechfmrss.App;
+import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
 import ru.vasiliev.hightechfmrss.domain.article.ArticleInteractor;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
@@ -83,12 +85,14 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
             @Override
             public void onComplete() {
                 getViewState().updateMenu(mBookmarked = true);
+                getViewState().enableMenuItem(R.id.menu_bookmark);
                 Timber.d("Bookmark added");
             }
 
             @Override
             public void onError(Throwable e) {
                 // Error dialog
+                getViewState().enableMenuItem(R.id.menu_bookmark);
                 Timber.d("Error add bookmark");
             }
         });
@@ -99,12 +103,14 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
             @Override
             public void onComplete() {
                 getViewState().updateMenu(mBookmarked = false);
+                getViewState().enableMenuItem(R.id.menu_bookmark);
                 Timber.d("Bookmark removed");
             }
 
             @Override
             public void onError(Throwable e) {
                 // Error dialog
+                getViewState().enableMenuItem(R.id.menu_bookmark);
                 Timber.d("Error remove bookmark");
             }
         });

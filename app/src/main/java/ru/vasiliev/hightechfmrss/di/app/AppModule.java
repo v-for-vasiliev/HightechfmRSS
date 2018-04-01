@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.vasiliev.hightechfmrss.App;
+import ru.vasiliev.hightechfmrss.presentation.Router;
+import ru.vasiliev.hightechfmrss.presentation.RouterImpl;
 
 @Module
 public class AppModule {
@@ -21,5 +23,11 @@ public class AppModule {
     @Provides
     App provideApp() {
         return mApp;
+    }
+
+    @Singleton
+    @Provides
+    public Router provideRouter() {
+        return new RouterImpl();
     }
 }

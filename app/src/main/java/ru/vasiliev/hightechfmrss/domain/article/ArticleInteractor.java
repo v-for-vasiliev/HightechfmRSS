@@ -19,7 +19,7 @@ public class ArticleInteractor {
     private BookmarksRepository mBookmarksRepository;
 
     @Inject
-    public ArticleInteractor(BookmarksRepository bookmarksRepository) {
+    ArticleInteractor(BookmarksRepository bookmarksRepository) {
         mBookmarksRepository = bookmarksRepository;
     }
 
@@ -27,7 +27,7 @@ public class ArticleInteractor {
         return mBookmarksRepository.findByLink(link).compose(RxUtils.maybeIoScheduler());
     }
 
-    public Completable saveBookmark(Article article) {
+    public Completable addBookmark(Article article) {
         return mBookmarksRepository.addBookmark(article).compose(RxUtils.completableIoScheduler());
     }
 

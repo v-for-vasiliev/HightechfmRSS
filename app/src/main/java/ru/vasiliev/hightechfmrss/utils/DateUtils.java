@@ -1,7 +1,5 @@
 package ru.vasiliev.hightechfmrss.utils;
 
-import android.content.res.Resources;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Hours;
@@ -10,6 +8,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 import org.joda.time.format.DateTimeParser;
+
+import android.content.res.Resources;
 
 import java.util.Locale;
 
@@ -22,8 +22,10 @@ import timber.log.Timber;
  */
 
 public class DateUtils {
-    private static DateTimeFormatter DATE_FORMATTER_REGULAR = DateTimeFormat.forPattern(
-            "dd MMM HH:mm");
+
+    private static DateTimeFormatter DATE_FORMATTER_REGULAR = DateTimeFormat
+            .forPattern("dd MMM HH:mm");
+
     private static DateTimeFormatter DATE_FORMATTER_HHMM = DateTimeFormat.forPattern("HH:mm");
 
     private static DateTimeParser GMT_PARSER = DateTimeFormat.forPattern("ZZZ").getParser();
@@ -60,9 +62,9 @@ public class DateUtils {
                 int wh = withinHours(dateTime);
                 if (wh == 0) {
                     int wm = withinMinutes(dateTime);
-                    return getResources().getQuantityString(R.plurals.plurals_minutes_ago, -wm,
-                            -wm);
-                } else if (wh <= 0 && wh >= -LATEST_HOURS_INTERVAL) {
+                    return getResources()
+                            .getQuantityString(R.plurals.plurals_minutes_ago, -wm, -wm);
+                } else if (wh > 0 && wh <= LATEST_HOURS_INTERVAL) {
                     return getResources().getQuantityString(R.plurals.plurals_hours_ago, -wh, -wh);
                 } else {
                     return String.format(Locale.forLanguageTag("ru"), "Сегодня, %s",
@@ -103,15 +105,14 @@ public class DateUtils {
     }
 
     public static boolean withinLatestHours(DateTime targetDate) {
-        int wh = withinHours(targetDate);
-        return (wh <= 0 && wh >= -LATEST_HOURS_INTERVAL);
+        return withinHours(targetDate) <= LATEST_HOURS_INTERVAL;
     }
 
     public static int withinHours(DateTime targetDate) {
-        return Hours.hoursBetween(DateTime.now(), targetDate).getHours();
+        return Math.abs(Hours.hoursBetween(DateTime.now(), targetDate).getHours());
     }
 
     public static int withinMinutes(DateTime targetDate) {
-        return Minutes.minutesBetween(DateTime.now(), targetDate).getMinutes();
+        return Math.abs(Minutes.minutesBetween(DateTime.now(), targetDate).getMinutes());
     }
 }

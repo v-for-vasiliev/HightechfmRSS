@@ -28,7 +28,7 @@
                 android:id="@+id/article_cover"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
+                android:adjustViewBounds="false"
                 android:scaleType="fitXY"
                 tools:src="@drawable/image_not_found_1210x600"/>
 

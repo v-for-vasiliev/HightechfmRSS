@@ -1,5 +1,8 @@
 package ru.vasiliev.hightechfmrss.presentation.main;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,13 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.vasiliev.hightechfmrss.BuildConfig;
 import ru.vasiliev.hightechfmrss.R;
+import ru.vasiliev.hightechfmrss.presentation.bookmarks.BookmarksActivity;
 import ru.vasiliev.hightechfmrss.viewstyle.RssViewPager;
 
 public class MainActivity extends MvpAppCompatActivity
@@ -43,9 +44,8 @@ public class MainActivity extends MvpAppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -103,24 +103,16 @@ public class MainActivity extends MvpAppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()) {
+            case R.id.nav_bookmarks:
+                BookmarksActivity.start(this);
+                break;
+            case R.id.nav_about:
+                break;
+            default:
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

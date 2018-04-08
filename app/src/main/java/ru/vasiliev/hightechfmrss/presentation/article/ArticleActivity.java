@@ -172,7 +172,7 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleView
         mGlideRequestManager = Glide.with(this);
         mEnclosureAdapter = new EnclosureAdapter(mGlideRequestManager);
 
-        mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
+        mPreloadSizeProvider = new ViewPreloadSizeProvider<>(mEnclosureRecycler);
 
         RecyclerViewPreloader<Enclosure> preloader = new RecyclerViewPreloader<>(Glide.with(this),
                 mEnclosureAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);

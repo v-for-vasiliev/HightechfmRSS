@@ -1,5 +1,13 @@
 package ru.vasiliev.hightechfmrss.presentation.main.rss;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
+import com.bumptech.glide.util.ViewPreloadSizeProvider;
+import com.github.ybq.android.spinkit.SpinKitView;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,14 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
-import com.bumptech.glide.util.ViewPreloadSizeProvider;
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ import ru.vasiliev.hightechfmrss.viewstyle.TopSnapLayoutManager;
 import timber.log.Timber;
 
 public class RssFragment extends MvpAppCompatFragment implements RssView,
-        RssAdapter.RssItemSelectedListener {
+        ArticleListAdapter.RssItemSelectedListener {
 
     private static final String PARAM_CATEGORY_ID = "PARAM_CATEGORY_ID";
 
@@ -58,7 +58,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     private TopSnapLayoutManager mRssRecyclerLayoutManager;
     private RequestManager mRssRecyclerGlideRequestManager;
     private ViewPreloadSizeProvider<Article> mPreloadSizeProvider;
-    private RssAdapter mRssAdapter;
+    private ArticleListAdapter mArticleListAdapter;
 
     @InjectPresenter
     RssPresenter mRssPresenter;
@@ -156,20 +156,20 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
         mRssRecycler.setLayoutManager(mRssRecyclerLayoutManager);
 
         mRssRecyclerGlideRequestManager = Glide.with(this);
-        mRssAdapter = new RssAdapter(mRssRecyclerGlideRequestManager,
+        mArticleListAdapter = new ArticleListAdapter(mRssRecyclerGlideRequestManager,
                 mRssPresenter.getArticleCategory() == ArticleCategory.ALL);
-        mRssAdapter.setRssItemSelectedListener(this);
+        mArticleListAdapter.setRssItemSelectedListener(this);
 
         mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
 
         RecyclerViewPreloader<Article> preloader = new RecyclerViewPreloader<>(Glide.with(this),
-                mRssAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);
+                mArticleListAdapter, mPreloadSizeProvider, PRELOAD_AHEAD_ITEMS);
 
-        mRssRecycler.setAdapter(mRssAdapter);
+        mRssRecycler.setAdapter(mArticleListAdapter);
         mRssRecycler.addOnScrollListener(preloader);
 
         mRssRecycler.setRecyclerListener(holder -> {
-            RssAdapter.ViewHolder vh = (RssAdapter.ViewHolder) holder;
+            ArticleListAdapter.ViewHolder vh = (ArticleListAdapter.ViewHolder) holder;
             mRssRecyclerGlideRequestManager.clear(vh.articleCover);
         });
     }
@@ -190,8 +190,8 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
         toggleScreenLoader(false);
         toggleTabs(true);
         if (articleList != null && articleList.size() > 0) {
-            mRssAdapter.setData(articleList);
-            mRssAdapter.notifyDataSetChanged();
+            mArticleListAdapter.setData(articleList);
+            mArticleListAdapter.notifyDataSetChanged();
         }
     }
 

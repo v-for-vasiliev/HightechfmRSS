@@ -3,7 +3,6 @@ package ru.vasiliev.hightechfmrss.presentation.article;
 import com.arellomobile.mvp.InjectViewState;
 
 import android.content.Intent;
-import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -46,18 +45,18 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
         getViewState().showArticle(mArticle);
     }
 
-    public Intent createShareIntent() {
+    Intent createShareIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, mArticle.link);
         return shareIntent;
     }
 
-    public boolean isBookmarked() {
+    boolean isBookmarked() {
         return mBookmarked;
     }
 
-    public void checkIsBookmarked() {
+    void checkIsBookmarked() {
         mArticleInteractor.findByLink(mArticle.link)
                 .subscribe(new DisposableMaybeObserver<Article>() {
                     @Override
@@ -80,8 +79,8 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
                 });
     }
 
-    public void bookmarkArticle() {
-        mArticleInteractor.saveBookmark(mArticle).subscribe(new DisposableCompletableObserver() {
+    void bookmarkArticle() {
+        mArticleInteractor.addBookmark(mArticle).subscribe(new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
                 getViewState().updateMenu(mBookmarked = true);
@@ -98,7 +97,7 @@ public class ArticlePresenter extends MvpBasePresenter<ArticleView> {
         });
     }
 
-    public void removeFromBookmarks() {
+    void removeFromBookmarks() {
         mArticleInteractor.deleteBookmark(mArticle).subscribe(new DisposableCompletableObserver() {
             @Override
             public void onComplete() {

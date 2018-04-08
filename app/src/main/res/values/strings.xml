@@ -8,9 +8,16 @@
     <string name="article_action_share_tooltip">Отправить</string>
     <string name="article_action_bookmark_tooltip">Отправить</string>
 
+    <!-- Bookmarks -->
+    <string name="bookmarks_title">Закладки</string>
+
+    <!-- About -->
+    <string name="about_title">О приложении</string>
+
     <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_info_section">Информация</string>
 
     <!-- Date and time -->
     <plurals name="plurals_hours_ago">

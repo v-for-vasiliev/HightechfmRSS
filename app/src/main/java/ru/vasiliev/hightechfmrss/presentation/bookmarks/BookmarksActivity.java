@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -40,8 +39,6 @@ public class BookmarksActivity extends MvpAppCompatActivity
 
     @BindView(R.id.bookmarks_loader)
     SpinKitView mBookmarksLoader;
-
-    Menu mMenu;
 
     private TopSnapLayoutManager mBookmarksRecyclerLayoutManager;
 
@@ -86,7 +83,7 @@ public class BookmarksActivity extends MvpAppCompatActivity
         mBookmarksRecycler.setLayoutManager(mBookmarksRecyclerLayoutManager);
 
         mBookmarksRecyclerGlideRequestManager = Glide.with(this);
-        mArticleListAdapter = new ArticleListAdapter(mBookmarksRecyclerGlideRequestManager, false);
+        mArticleListAdapter = new ArticleListAdapter(mBookmarksRecyclerGlideRequestManager, true);
         mArticleListAdapter.setRssItemSelectedListener(this);
 
         mPreloadSizeProvider = new ViewPreloadSizeProvider<>();
@@ -106,7 +103,7 @@ public class BookmarksActivity extends MvpAppCompatActivity
 
     @Override
     public void onRssItemSelected(Article article) {
-        mBookmarksPresenter.getRouter().openArticle((AppCompatActivity) this, article);
+        mBookmarksPresenter.getRouter().openArticle(this, article);
     }
 
     @Override
@@ -129,56 +126,9 @@ public class BookmarksActivity extends MvpAppCompatActivity
     }
 
     @Override
-    public void updateMenu(boolean bookmarksFound) {
-        if (mMenu == null) {
-            return;
-        }
-        MenuItem bookmarkItem = mMenu.findItem(R.id.menu_bookmark);
-        bookmarkItem.setIcon(bookmarksFound ? R.drawable.ic_menu_bookmark_white
-                : R.drawable.ic_menu_bookmark_border_white);
-        bookmarkItem.setVisible(true);
-    }
-
-    @Override
-    public void enableMenuItem(int id) {
-        MenuItem item = mMenu.findItem(R.id.menu_bookmark);
-        if (item != null) {
-            item.setEnabled(true);
-        }
-    }
-
-    @Override
-    public void disableMenuItem(int id) {
-        MenuItem item = mMenu.findItem(R.id.menu_bookmark);
-        if (item != null) {
-            item.setEnabled(false);
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.article_menu, menu);
+        // getMenuInflater().inflate(R.menu.bookmarks_menu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(mMenu = menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            case R.id.menu_share:
-                return true;
-            case R.id.menu_bookmark:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void toggleScreenLoader(boolean isLoading) {

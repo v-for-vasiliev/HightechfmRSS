@@ -8,9 +8,15 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+/**
+ * AppBar edge snapping behavior.
+ * When scrolling ends, if the view is only partially visible, the view is snapped and scrolled to
+ * its closest edge.
+ */
 public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
 
     private ValueAnimator mAnimator;
+
     private boolean mNestedScrollStarted = false;
 
     public AppBarLayoutSnapBehavior(Context context, AttributeSet attrs) {
@@ -20,9 +26,9 @@ public class AppBarLayoutSnapBehavior extends AppBarLayout.Behavior {
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout parent, AppBarLayout child,
             View directTargetChild, View target, int nestedScrollAxes, int type) {
-        mNestedScrollStarted = super.onStartNestedScroll(parent, child, directTargetChild, target,
-                nestedScrollAxes,
-                type);
+        mNestedScrollStarted = super
+                .onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes,
+                        type);
 
         if (mNestedScrollStarted && mAnimator != null) {
             mAnimator.cancel();

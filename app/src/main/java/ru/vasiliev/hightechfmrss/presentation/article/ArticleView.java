@@ -11,12 +11,11 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
  * Created by vasiliev on 11/02/2018.
  */
 
+@StateStrategyType(AddToEndSingleStrategy.class)
 public interface ArticleView extends MvpView {
 
-    @StateStrategyType(AddToEndSingleStrategy.class)
     void showArticle(Article article);
 
-    @StateStrategyType(AddToEndSingleStrategy.class)
     void updateMenu(boolean isBookmarked);
 
     @StateStrategyType(SkipStrategy.class)

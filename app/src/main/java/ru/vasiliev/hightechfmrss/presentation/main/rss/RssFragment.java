@@ -6,7 +6,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -45,13 +45,13 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     @BindView(R.id.rss_swipetorefresh)
     SwipeRefreshLayout mRssSwipe;
 
-    /*
     @BindView(R.id.rss_loader)
     ProgressBar mRssLoader;
-    */
 
+    /*
     @BindView(R.id.rss_loader)
     SpinKitView mRssLoader;
+    */
 
     FloatingActionButton mFloatingButton;
 

@@ -13,6 +13,19 @@
                   android:paddingBottom="24dp"
                   android:paddingTop="8dp">
 
+        <ru.vasiliev.hightechfmrss.viewstyle.recyclerviewindicator.RecyclerViewIndicator
+                android:id="@+id/enclosure_dots_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:visibility="gone"
+                app:avi_animation_enable="true"
+                app:avi_drawable="@drawable/active_dot_indicator"
+                app:avi_drawable_unselected="@drawable/unactive_dot_indicator"
+                app:avi_gravity="center"
+                app:avi_height="4dp"
+                app:avi_margin="2dp"
+                app:avi_width="4dp"/>
+
         <TextView android:id="@+id/article_title"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

@@ -1,63 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="ru.vasiliev.hightechfmrss.presentation.article.ArticleActivity">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="ru.vasiliev.hightechfmrss.presentation.article.ArticleActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/toolbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:titleEnabled="false">
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:background="@color/white"
-                android:orientation="vertical"
-                app:layout_collapseMode="parallax">
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleEnabled="false">
 
-                <android.support.v7.widget.RecyclerView
+            <android.support.v7.widget.RecyclerView
                     android:id="@+id/enclosure_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none"/>
-
-                <ru.vasiliev.hightechfmrss.viewstyle.recyclerviewindicator.RecyclerViewIndicator
-                    android:id="@+id/enclosure_dots_indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="12dp"
-                    android:visibility="gone"
-                    app:avi_animation_enable="true"
-                    app:avi_drawable="@drawable/active_dot_indicator"
-                    app:avi_drawable_unselected="@drawable/unactive_dot_indicator"
-                    app:avi_gravity="center"
-                    app:avi_height="4dp"
-                    app:avi_margin="2dp"
-                    app:avi_width="4dp"/>
-            </LinearLayout>
+                    android:layout_marginTop="?attr/actionBarSize"
+                    android:scrollbars="none"
+                    app:layout_collapseMode="parallax"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                app:titleTextAppearance="@style/ToolbarTextAppearance"
-                app:layout_collapseMode="parallax"/>
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    app:titleTextAppearance="@style/ToolbarTextAppearance"
+                    app:layout_collapseMode="parallax"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

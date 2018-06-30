@@ -37,7 +37,6 @@ ext {
             retrofit                  : "com.squareup.retrofit2:retrofit:${versions.retrofit}", // compile
             retrofitRxJavaAdapter     : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}", // compile
             retrofitConverterGson     : "com.squareup.retrofit2:converter-gson:${versions.retrofit}", // compile
-            // retrofitConverterJAXB     : "com.squareup.retrofit2:converter-jaxb:${versions.JAXBConverter}", // compile
             retrofitConverterSimpleXML: "com.squareup.retrofit2:converter-simplexml:${versions.retrofit}" // compile
     ]
 

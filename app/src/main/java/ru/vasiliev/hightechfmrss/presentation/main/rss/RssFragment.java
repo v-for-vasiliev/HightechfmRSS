@@ -17,7 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
@@ -32,8 +32,8 @@ import ru.vasiliev.hightechfmrss.presentation.main.RssPagerMainActivity;
 import ru.vasiliev.hightechfmrss.viewstyle.TopSnapLayoutManager;
 import timber.log.Timber;
 
-public class RssFragment extends MvpAppCompatFragment implements RssView,
-        ArticleListAdapter.RssItemSelectedListener {
+public class RssFragment extends MvpAppCompatFragment
+        implements RssView, ArticleListAdapter.RssItemSelectedListener {
 
     private static final String PARAM_CATEGORY_ID = "PARAM_CATEGORY_ID";
 
@@ -46,18 +46,16 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     SwipeRefreshLayout mRssSwipe;
 
     @BindView(R.id.rss_loader)
-    ProgressBar mRssLoader;
-
-    /*
-    @BindView(R.id.rss_loader)
-    SpinKitView mRssLoader;
-    */
+    RelativeLayout mRssLoader;
 
     FloatingActionButton mFloatingButton;
 
     private TopSnapLayoutManager mRssRecyclerLayoutManager;
+
     private RequestManager mRssRecyclerGlideRequestManager;
+
     private ViewPreloadSizeProvider<Article> mPreloadSizeProvider;
+
     private ArticleListAdapter mArticleListAdapter;
 
     @InjectPresenter
@@ -66,8 +64,7 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     RecyclerView.OnScrollListener mFabOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            if (mRssRecyclerLayoutManager.findFirstVisibleItemPosition()
-                    == 0) {
+            if (mRssRecyclerLayoutManager.findFirstVisibleItemPosition() == 0) {
                 mFloatingButton.hide();
             } else {
                 mFloatingButton.show();
@@ -101,9 +98,8 @@ public class RssFragment extends MvpAppCompatFragment implements RssView,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mRssPresenter.setArticleCategory(
-                    ArticleCategory.of(
-                            getArguments().getInt(PARAM_CATEGORY_ID, ArticleCategory.ALL.getId())));
+            mRssPresenter.setArticleCategory(ArticleCategory
+                    .of(getArguments().getInt(PARAM_CATEGORY_ID, ArticleCategory.ALL.getId())));
         }
         Timber.d("Fragment(%s) - onCreate()", mRssPresenter.getArticleCategory());
     }

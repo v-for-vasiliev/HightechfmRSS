@@ -4,12 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
     <application android:name=".App"
                  android:allowBackup="true"
-                 android:icon="@drawable/ic_hightech_large"
+                 android:icon="@mipmap/ic_launcher"
+                 android:roundIcon="@mipmap/ic_launcher_round"
                  android:label="@string/app_name"
-                 android:roundIcon="@drawable/ic_hightech_large"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
 

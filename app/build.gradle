@@ -125,5 +125,4 @@ dependencies {
     // -----
     // UI
     // -----
-    compile 'com.github.ybq:Android-SpinKit:1.1.0'
 }

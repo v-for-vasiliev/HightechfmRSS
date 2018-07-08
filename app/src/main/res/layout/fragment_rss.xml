@@ -19,7 +19,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="none"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone"
+                    android:layoutAnimation="@anim/rss_recycler_layout_animation_fall_down"/>
 
             <include layout="@layout/loader_with_logo"
                      android:id="@+id/rss_loader"

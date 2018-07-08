@@ -8,4 +8,8 @@
 
     <!-- Height of the status bar -->
     <dimen name="status_bar_height">32dp</dimen>
+
+    <!-- Recycler enter animation -->
+    <integer name="rss_recycler_anim_duration_medium">600</integer>
+    <integer name="rss_recycler_anim_duration_long">1000</integer>
 </resources>

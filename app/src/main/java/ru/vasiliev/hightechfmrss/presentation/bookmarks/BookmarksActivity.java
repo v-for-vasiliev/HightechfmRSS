@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
-import com.github.ybq.android.spinkit.SpinKitView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,8 +38,8 @@ public class BookmarksActivity extends MvpAppCompatActivity
     @BindView(R.id.bookmarks_recycler)
     RecyclerView mBookmarksRecycler;
 
-    @BindView(R.id.bookmarks_loader)
-    SpinKitView mBookmarksLoader;
+    @BindView(R.id.rss_loader)
+    RelativeLayout mBookmarksLoader;
 
     private TopSnapLayoutManager mBookmarksRecyclerLayoutManager;
 

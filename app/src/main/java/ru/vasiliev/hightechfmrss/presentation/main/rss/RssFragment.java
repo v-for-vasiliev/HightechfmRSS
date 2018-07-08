@@ -188,8 +188,10 @@ public class RssFragment extends MvpAppCompatFragment
         if (articleList != null && articleList.size() > 0) {
             mArticleListAdapter.setData(articleList);
             mArticleListAdapter.notifyDataSetChanged();
+            runLayoutAnimation(mRssRecycler);
         }
     }
+
 
     @Override
     public void showLoader(boolean feedLoaded) {
@@ -224,5 +226,10 @@ public class RssFragment extends MvpAppCompatFragment
         if (tabs != null) {
             tabs.setVisibility(show ? View.VISIBLE : View.GONE);
         }
+    }
+
+    private void runLayoutAnimation(RecyclerView recyclerView) {
+        recyclerView.scheduleLayoutAnimation();
+        recyclerView.invalidate();
     }
 }

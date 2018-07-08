@@ -118,6 +118,7 @@ public class BookmarksActivity extends MvpAppCompatActivity
         if (articleList != null && articleList.size() > 0) {
             mArticleListAdapter.setData(articleList);
             mArticleListAdapter.notifyDataSetChanged();
+            runLayoutAnimation(mBookmarksRecycler);
         }
     }
 
@@ -132,11 +133,6 @@ public class BookmarksActivity extends MvpAppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void toggleScreenLoader(boolean isLoading) {
-        mBookmarksLoader.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-        mBookmarksRecycler.setVisibility(isLoading ? View.GONE : View.VISIBLE);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -145,5 +141,15 @@ public class BookmarksActivity extends MvpAppCompatActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleScreenLoader(boolean isLoading) {
+        mBookmarksLoader.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        mBookmarksRecycler.setVisibility(isLoading ? View.GONE : View.VISIBLE);
+    }
+
+    private void runLayoutAnimation(RecyclerView recyclerView) {
+        recyclerView.scheduleLayoutAnimation();
+        recyclerView.invalidate();
     }
 }

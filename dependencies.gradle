@@ -22,7 +22,7 @@ ext {
 
     dagger2 = [
             dagger                   : "com.google.dagger:dagger:${versions.dagger2}", // compile
-            daggerProcessor          : "com.google.dagger:dagger-compiler:${versions.dagger2}", // annotationProcessor
+            daggerCompiler           : "com.google.dagger:dagger-compiler:${versions.dagger2}", // annotationProcessor
             daggerAndroid            : "com.google.dagger:dagger-android:${versions.dagger2}", // compile
             daggerAndroidSupport     : "com.google.dagger:dagger-android-support:${versions.dagger2}", // compile
             daggerAnnotationProcessor: "com.google.dagger:dagger-android-processor:${versions.dagger2}" // annotationProcessor
@@ -83,5 +83,48 @@ ext {
 
     gson = [
             gson: "com.google.code.gson:gson:${versions.gson}" // compile
+    ]
+
+    HightechFmRssDependecies = [
+            // Dagger2
+            [configuration: "compile", dependency: dagger2.dagger],
+            [configuration: "annotationProcessor", dependency: dagger2.daggerCompiler],
+            [configuration: "compile", dependency: dagger2.daggerAndroid],
+            [configuration: "compile", dependency: dagger2.daggerAndroidSupport],
+            [configuration: "annotationProcessor", dependency: dagger2.daggerAnnotationProcessor],
+            // RxJava2
+            [configuration: "compile", dependency: rxjava2.rxjava],
+            [configuration: "compile", dependency: rxjava2.rxandroid],
+            // Retrofit
+            [configuration: "compile", dependency: retrofit.retrofit],
+            [configuration: "compile", dependency: retrofit.retrofitRxJavaAdapter],
+            [configuration: "compile", dependency: retrofit.retrofitConverterSimpleXML],
+            // ButterKnife
+            [configuration: "compile", dependency: butterknife.butterknife],
+            [configuration: "annotationProcessor", dependency: butterknife.butterknifeAnnotationProcessor],
+            // Timber
+            [configuration: "compile", dependency: timber.timber],
+            // Recycler
+            [configuration: "compile", dependency: recycler.cardview],
+            [configuration: "compile", dependency: recycler.recyclerview],
+            // Glide
+            [configuration: "implementation", dependency: glide.glide],
+            [configuration: "annotationProcessor", dependency: glide.glideAnnotationProcessor],
+            [configuration: "compile", dependency: glide.recyclerIntegration],
+            // Moxy
+            [configuration: "compile", dependency: moxy.moxy],
+            [configuration: "annotationProcessor", dependency: moxy.moxyAnnotationProcessor],
+            [configuration: "compile", dependency: moxy.moxyAppCompat],
+            // JodaTime
+            [configuration: "compile", dependency: jodatime.jodatime],
+            // Room
+            [configuration: "implementation", dependency: room.room],
+            [configuration: "annotationProcessor", dependency: room.roomAnnotationProcessor],
+            [configuration: "implementation", dependency: room.roomRxJava],
+            // Stetho
+            [configuration: "compile", dependency: stetho.stetho],
+            [configuration: "compile", dependency: stetho.stethoOkHttp],
+            // Gson
+            [configuration: "compile", dependency: gson.gson]
     ]
 }

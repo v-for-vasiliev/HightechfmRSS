@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "ru.vasiliev.hightechfmrss"
@@ -69,6 +68,7 @@ android {
             universalApk false
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -81,48 +81,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    // Dagger2
-    compile dagger2.dagger
-    annotationProcessor dagger2.daggerProcessor
-    compile dagger2.daggerAndroid
-    compile dagger2.daggerAndroidSupport
-    annotationProcessor dagger2.daggerAnnotationProcessor
-    // RxJava2
-    compile rxjava2.rxjava
-    compile rxjava2.rxandroid
-    // Retrofit
-    compile retrofit.retrofit
-    compile retrofit.retrofitRxJavaAdapter
-    compile retrofit.retrofitConverterSimpleXML
-    // ButterKnife
-    compile butterknife.butterknife
-    annotationProcessor butterknife.butterknifeAnnotationProcessor
-    // Timber
-    compile timber.timber
-    // Recycler
-    compile recycler.cardview
-    compile recycler.recyclerview
-    // Glide
-    implementation glide.glide
-    annotationProcessor glide.glideAnnotationProcessor
-    compile glide.recyclerIntegration
-    // Moxy
-    compile moxy.moxy
-    annotationProcessor moxy.moxyAnnotationProcessor
-    compile moxy.moxyAppCompat
-    // JodaTime
-    compile jodatime.jodatime
-    // Room
-    implementation room.room
-    annotationProcessor room.roomAnnotationProcessor
-    implementation room.roomRxJava
-    // Stetho
-    compile stetho.stetho
-    compile stetho.stethoOkHttp
-    // Gson
-    compile gson.gson
 
-    // -----
-    // UI
-    // -----
+    HightechFmRssDependecies.each {
+        add(it.configuration, it.dependency)
+    }
 }

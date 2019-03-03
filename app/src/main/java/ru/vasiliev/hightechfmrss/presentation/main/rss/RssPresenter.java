@@ -14,7 +14,7 @@ import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
 import ru.vasiliev.hightechfmrss.domain.model.RssFeed;
 import ru.vasiliev.hightechfmrss.domain.rss.RssInteractor;
-import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
+import ru.vasiliev.hightechfmrss.presentation.base.MvpBasePresenter;
 import ru.vasiliev.hightechfmrss.presentation.Router;
 import timber.log.Timber;
 

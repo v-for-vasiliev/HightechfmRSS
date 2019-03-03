@@ -13,7 +13,7 @@ import ru.vasiliev.hightechfmrss.R;
 import ru.vasiliev.hightechfmrss.di.article.ArticleComponent;
 import ru.vasiliev.hightechfmrss.domain.article.ArticleInteractor;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
-import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
+import ru.vasiliev.hightechfmrss.presentation.base.MvpBasePresenter;
 import timber.log.Timber;
 
 /**

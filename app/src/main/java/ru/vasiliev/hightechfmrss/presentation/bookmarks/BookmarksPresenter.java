@@ -12,7 +12,7 @@ import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.di.bookmarks.BookmarksComponent;
 import ru.vasiliev.hightechfmrss.domain.bookmarks.BookmarksInteractor;
 import ru.vasiliev.hightechfmrss.domain.model.Article;
-import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
+import ru.vasiliev.hightechfmrss.presentation.base.MvpBasePresenter;
 import ru.vasiliev.hightechfmrss.presentation.Router;
 import timber.log.Timber;
 

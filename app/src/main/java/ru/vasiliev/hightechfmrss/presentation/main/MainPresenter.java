@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState;
 
 import ru.vasiliev.hightechfmrss.App;
 import ru.vasiliev.hightechfmrss.di.main.MainComponent;
-import ru.vasiliev.hightechfmrss.presentation.MvpBasePresenter;
+import ru.vasiliev.hightechfmrss.presentation.base.MvpBasePresenter;
 
 /**
  * Created by vasiliev on 15/02/2018.

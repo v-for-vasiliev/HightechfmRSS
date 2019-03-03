@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "ru.vasiliev.hightechfmrss"
@@ -11,15 +12,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk false
         }
     }
+
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -40,7 +46,7 @@ android {
             debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_TRACE_STATE", "release"
+            buildConfigField "String", "NETWORK_TRACE_STATE", "\"release\""
         }
 
         debug {
@@ -59,30 +65,16 @@ android {
             applicationIdSuffix ".debugStaging"
         }
     }
-
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a'
-            universalApk false
-        }
-    }
-    buildToolsVersion '27.0.3'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${versions.supportLib}"
-    implementation "com.android.support:support-v4:${versions.supportLib}"
-    implementation "com.android.support:design:${versions.supportLib}"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:support-v4:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    HightechFmRssDependecies.each {
+    AppDependecies.each {
+        add(it.configuration, it.dependency)
+    }
+
+    TestsDependecies.each {
         add(it.configuration, it.dependency)
     }
 }

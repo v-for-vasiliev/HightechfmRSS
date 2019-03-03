@@ -40,7 +40,7 @@ public class Article implements Serializable, Comparable<Article> {
     @Element(name = "link")
     public String link = "unknown";
 
-    @Element(name = "description")
+    @Element(name = "description", required = false)
     public String description;
 
     @Element(name = "author", required = false)

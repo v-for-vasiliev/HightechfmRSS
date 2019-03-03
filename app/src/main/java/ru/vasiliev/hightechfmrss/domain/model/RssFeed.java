@@ -13,6 +13,7 @@ import java.util.List;
 
 @Root(name = "rss", strict = false)
 public class RssFeed {
+
     @Element(name = "title")
     @Path("channel")
     public String title;
@@ -21,7 +22,7 @@ public class RssFeed {
     @Path("channel")
     public String link;
 
-    @Element(name = "description")
+    @Element(name = "description", required = false)
     @Path("channel")
     public String description;
 
@@ -29,15 +30,15 @@ public class RssFeed {
     @Path("channel")
     public String language;
 
-    @Element(name = "copyright")
+    @Element(name = "copyright", required = false)
     @Path("channel")
     public String copyright;
 
-    @Element(name = "pubDate")
+    @Element(name = "pubDate", required = false)
     @Path("channel")
     public String pubDate;
 
-    @Element(name = "ttl")
+    @Element(name = "ttl", required = false)
     @Path("channel")
     public String ttl;
 
@@ -47,15 +48,9 @@ public class RssFeed {
 
     @Override
     public String toString() {
-        return "RssFeed{" +
-                "title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", description='" + description + '\'' +
-                ", language='" + language + '\'' +
-                ", copyright='" + copyright + '\'' +
-                ", pubDate='" + pubDate + '\'' +
-                ", ttl='" + ttl + '\'' +
-                ", articleList=" + articleList +
-                '}';
+        return "RssFeed{" + "title='" + title + '\'' + ", link='" + link + '\'' + ", description='"
+                + description + '\'' + ", language='" + language + '\'' + ", copyright='"
+                + copyright + '\'' + ", pubDate='" + pubDate + '\'' + ", ttl='" + ttl + '\''
+                + ", articleList=" + articleList + '}';
     }
 }

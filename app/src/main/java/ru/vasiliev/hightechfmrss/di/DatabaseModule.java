@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.di;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import javax.inject.Singleton;
 

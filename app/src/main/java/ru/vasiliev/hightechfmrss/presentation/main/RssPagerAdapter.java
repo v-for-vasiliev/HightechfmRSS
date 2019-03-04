@@ -1,8 +1,8 @@
 package ru.vasiliev.hightechfmrss.presentation.main;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import ru.vasiliev.hightechfmrss.domain.model.ArticleCategory;
 import ru.vasiliev.hightechfmrss.presentation.main.rss.RssFragment;

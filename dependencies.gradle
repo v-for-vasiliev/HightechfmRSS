@@ -10,10 +10,11 @@ ext {
             rxandroid  : '2.0.1',
             rxbinding  : "0.4.0",
             retrofit   : '2.3.0',
-            butterknife: '8.8.1',
+            butterknife: '9.0.0-rc2',
             timber     : '4.1.2',
             glide      : '4.3.1',
-            moxy       : '1.5.3',
+            moxy       : '1.5.5',
+            moxyX      : '1.5.7',
             jodatime   : '2.9.9',
             room       : '1.1.0-beta1',
             stetho     : '1.5.0',
@@ -21,29 +22,52 @@ ext {
     ]
 
     supportVersions = [
-            supportLibs     : '28.0.0',
-            constraintLayout: '1.1.3'
+            support         : '28.0.0',
+            constraintLayout: '1.1.3',
+            testRunner      : '1.0.1',
+            espressoCore    : '3.0.1'
+    ]
+
+    androidXVersions = [
+            supportX        : '1.0.0',
+            constraintLayout: '1.1.2',
+            testRunner      : '1.1.0',
+            espressoCore    : '3.1.0'
     ]
 
     testsVersions = [
-            junit       : '4.12',
-            testRunner  : '1.0.1',
-            espressoCore: '3.0.1'
+            junit: '4.12'
     ]
 
     support = [
-            supportv4      : "com.android.support:support-v4:${supportVersions.supportLibs}", // implementation
-            appCompat      : "com.android.support:appcompat-v7:${supportVersions.supportLibs}", // implementation
-            design         : "com.android.support:design:${supportVersions.supportLibs}", // implementation
-            recyclerview   : "com.android.support:recyclerview-v7:${supportVersions.supportLibs}", // implementation
-            cardview       : "com.android.support:cardview-v7:${supportVersions.supportLibs}", // implementation
-            constaintLayout: "com.android.support.constraint:constraint-layout:${supportVersions.constraintLayout}" // implementation
+            supportV4       : "com.android.support:support-v4:${supportVersions.support}", // implementation
+            appCompat       : "com.android.support:appcompat-v7:${supportVersions.support}", // implementation
+            design          : "com.android.support:design:${supportVersions.support}", // implementation
+            recyclerView    : "com.android.support:recyclerview-v7:${supportVersions.support}", // implementation
+            cardView        : "com.android.support:cardview-v7:${supportVersions.support}", // implementation
+            constraintLayout: "com.android.support.constraint:constraint-layout:${supportVersions.constraintLayout}" // implementation
+    ]
+
+    androidX = [
+            supportV4      : "androidx.legacy:legacy-support-v4:${androidXVersions.supportX}", // implementation
+            supportV13     : "androidx.legacy:legacy-support-v13:${androidXVersions.supportX}", // implementation
+            appCompat      : "androidx.appcompat:appcompat:${androidXVersions.supportX}", // implementation
+            material       : "com.google.android.material:material:${androidXVersions.supportX}", // implementation
+            recyclerView   : "androidx.recyclerview:recyclerview:${androidXVersions.supportX}", // implementation
+            cardView       : "androidx.cardview:cardview:${androidXVersions.supportX}", // implementation
+            constaintLayout: "androidx.constraintlayout:constraintlayout:${androidXVersions.constraintLayout}" // implementation
     ]
 
     tests = [
             junit       : "junit:junit:${testsVersions.junit}", // testImplementation
-            testRunner  : "com.android.support.test:runner:${testsVersions.testRunner}", // androidTestImplementation
-            espressoCore: "com.android.support.test.espresso:espresso-core:${testsVersions.espressoCore}", // androidTestImplementation
+            testRunner  : "com.android.support.test:runner:${supportVersions.testRunner}", // androidTestImplementation
+            espressoCore: "com.android.support.test.espresso:espresso-core:${supportVersions.espressoCore}", // androidTestImplementation
+    ]
+
+    testsX = [
+            junit       : "junit:junit:${testsVersions.junit}", // testImplementation
+            testRunner  : "androidx.test:runner:${androidXVersions.testRunner}", // androidTestImplementation
+            espressoCore: "androidx.test.espresso:espresso-core:${androidXVersions.espressoCore}", // androidTestImplementation
     ]
 
     dagger2 = [
@@ -89,6 +113,12 @@ ext {
             moxyAppCompat          : "com.arello-mobile:moxy-app-compat:${versions.moxy}" // implementation
     ]
 
+    moxyX = [
+            moxy                   : "tech.schoolhelper:moxy-x:${versions.moxyX}", // implementation
+            moxyAnnotationProcessor: "tech.schoolhelper:moxy-x-compiler:${versions.moxyX}", // annotationProcessor
+            moxyAppCompat          : "tech.schoolhelper:moxy-x-androidx:${versions.moxyX}" // implementation
+    ]
+
     jodatime = [
             jodatime: "joda-time:joda-time:${versions.jodatime}" // implementation
     ]
@@ -110,12 +140,17 @@ ext {
 
     AppDependecies = [
             // Support
-            [configuration: "implementation", dependency: support.supportv4],
+            [configuration: "implementation", dependency: support.supportV4],
             [configuration: "implementation", dependency: support.appCompat],
             [configuration: "implementation", dependency: support.design],
-            [configuration: "implementation", dependency: support.constaintLayout],
-            [configuration: "implementation", dependency: support.cardview],
-            [configuration: "implementation", dependency: support.recyclerview],
+            [configuration: "implementation", dependency: support.recyclerView],
+            [configuration: "implementation", dependency: support.cardView],
+            [configuration: "implementation", dependency: support.constraintLayout],
+
+            // Tests
+            [configuration: "testImplementation", dependency: tests.junit],
+            [configuration: "androidTestImplementation", dependency: tests.testRunner],
+            [configuration: "androidTestImplementation", dependency: tests.espressoCore],
 
             // Dagger2
             [configuration: "implementation", dependency: dagger2.dagger],
@@ -168,10 +203,69 @@ ext {
             [configuration: "implementation", dependency: gson.gson]
     ]
 
-    TestsDependecies = [
+    AndroidXAppDependecies = [
+            // AndroidX
+            //[configuration: "implementation", dependency: androidX.supportV4],
+            //[configuration: "implementation", dependency: androidX.supportV13],
+            [configuration: "implementation", dependency: androidX.appCompat],
+            [configuration: "implementation", dependency: androidX.material],
+            [configuration: "implementation", dependency: androidX.recyclerView],
+            [configuration: "implementation", dependency: androidX.cardView],
+            [configuration: "implementation", dependency: androidX.constaintLayout],
+
             // Tests
-            [configuration: "testImplementation", dependency: tests.junit],
-            [configuration: "androidTestImplementation", dependency: tests.testRunner],
-            [configuration: "androidTestImplementation", dependency: tests.espressoCore]
+            [configuration: "testImplementation", dependency: testsX.junit],
+            [configuration: "androidTestImplementation", dependency: testsX.testRunner],
+            [configuration: "androidTestImplementation", dependency: testsX.espressoCore],
+
+            // Dagger2
+            [configuration: "implementation", dependency: dagger2.dagger],
+            [configuration: "annotationProcessor", dependency: dagger2.daggerCompiler],
+            [configuration: "implementation", dependency: dagger2.daggerAndroid],
+            [configuration: "implementation", dependency: dagger2.daggerAndroidSupport],
+            [configuration: "annotationProcessor", dependency: dagger2.daggerAnnotationProcessor],
+
+            // RxJava2
+            [configuration: "implementation", dependency: rxjava2.rxjava],
+            [configuration: "implementation", dependency: rxjava2.rxandroid],
+            [configuration: "implementation", dependency: rxjava2.rxbinding],
+
+            // Retrofit
+            [configuration: "implementation", dependency: retrofit.retrofit],
+            [configuration: "implementation", dependency: retrofit.retrofitRxJavaAdapter],
+            [configuration: "implementation", dependency: retrofit.retrofitConverterGson],
+            [configuration: "implementation", dependency: retrofit.retrofitConverterSimpleXML],
+
+            // ButterKnife
+            [configuration: "implementation", dependency: butterknife.butterknife],
+            [configuration: "annotationProcessor", dependency: butterknife.butterknifeAnnotationProcessor],
+
+            // Timber
+            [configuration: "implementation", dependency: timber.timber],
+
+            // Glide
+            [configuration: "implementation", dependency: glide.glide],
+            [configuration: "annotationProcessor", dependency: glide.glideAnnotationProcessor],
+            [configuration: "implementation", dependency: glide.recyclerIntegration],
+
+            // MoxyX
+            [configuration: "implementation", dependency: moxyX.moxy],
+            [configuration: "annotationProcessor", dependency: moxyX.moxyAnnotationProcessor],
+            [configuration: "implementation", dependency: moxyX.moxyAppCompat],
+
+            // JodaTime
+            [configuration: "implementation", dependency: jodatime.jodatime],
+
+            // Room
+            [configuration: "implementation", dependency: room.room],
+            [configuration: "annotationProcessor", dependency: room.roomAnnotationProcessor],
+            [configuration: "implementation", dependency: room.roomRxJava],
+
+            // Stetho
+            [configuration: "implementation", dependency: stetho.stetho],
+            [configuration: "implementation", dependency: stetho.stethoOkHttp],
+
+            // Gson
+            [configuration: "implementation", dependency: gson.gson]
     ]
 }

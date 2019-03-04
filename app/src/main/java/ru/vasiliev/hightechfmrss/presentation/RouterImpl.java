@@ -1,7 +1,7 @@
 package ru.vasiliev.hightechfmrss.presentation;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 import ru.vasiliev.hightechfmrss.presentation.article.ArticleActivity;

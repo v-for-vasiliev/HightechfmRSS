@@ -10,7 +10,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     splits {
@@ -70,11 +70,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    AppDependecies.each {
-        add(it.configuration, it.dependency)
-    }
-
-    TestsDependecies.each {
+    AndroidXAppDependecies.each {
         add(it.configuration, it.dependency)
     }
 }

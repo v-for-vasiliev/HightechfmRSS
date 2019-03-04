@@ -1,6 +1,6 @@
 package ru.vasiliev.hightechfmrss.presentation;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import ru.vasiliev.hightechfmrss.domain.model.Article;
 

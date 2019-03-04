@@ -3,7 +3,7 @@ package ru.vasiliev.hightechfmrss.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 import java.lang.reflect.Type;
 import java.util.Collections;

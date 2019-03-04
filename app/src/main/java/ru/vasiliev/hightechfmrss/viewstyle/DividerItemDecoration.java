@@ -3,9 +3,9 @@ package ru.vasiliev.hightechfmrss.viewstyle;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
